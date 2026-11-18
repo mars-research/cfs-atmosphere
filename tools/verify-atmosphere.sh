@@ -3,36 +3,23 @@
 #
 #   tools/verify-atmosphere.sh [verus options]
 #
-# This is what `atmo verify` does inside the Atmosphere nix shell. The first
-# run builds Verus in .tools/verus: the revision of mars-research/verus that
-# atmosphere/Cargo.lock pins, without std and alloc, as the Atmosphere flake
-# builds it. That needs rustup (Verus pins its own Rust toolchain) and
-# downloads Z3.
+# This is what `atmo verify` does inside the Atmosphere nix shell. Verus comes
+# from this repository's flake (`nix build .#verus`); the first run builds it,
+# which takes a while. Set VERUS to use another rust_verify.
 set -euo pipefail
 . "$(dirname "$0")/env.sh"
 unset RUSTC_BOOTSTRAP   # set by env.sh for the kernel build; Verus must not inherit it
 
-verus_dir="$PORT_ROOT/.tools/verus"
-verus="$verus_dir/source/target-verus/release/verus"
-rev="$(sed -n 's|.*mars-research/verus?branch=mars#\([0-9a-f]*\)".*|\1|p' \
-    "$ATMO_ROOT/Cargo.lock" | head -n 1)"
-
-if [ ! -x "$verus" ]; then
-    if [ ! -d "$verus_dir" ]; then
-        git clone https://github.com/mars-research/verus "$verus_dir"
-        git -C "$verus_dir" checkout --detach "$rev"
+verus="${VERUS:-}"
+if [ -z "$verus" ]; then
+    # The kernel must be verified with the Verus whose vstd it is built with.
+    rev="$(sed -n 's|.*mars-research/verus?branch=mars#\([0-9a-f]*\)".*|\1|p' \
+        "$ATMO_ROOT/Cargo.lock" | head -n 1)"
+    if ! grep -q "\"rev\": \"$rev\"" "$PORT_ROOT/flake.lock"; then
+        echo "warning: flake.lock does not pin Verus $rev, which atmosphere/Cargo.lock uses;" >&2
+        echo "         run: nix flake update verus" >&2
     fi
-    (
-        cd "$verus_dir/source"
-        [ -x z3 ] || ./tools/get-z3.sh
-        . ../tools/activate
-        vargo build --release --vstd-no-std --vstd-no-alloc
-    )
-fi
-
-built="$(git -C "$verus_dir" rev-parse HEAD)"
-if [ "$built" != "$rev" ]; then
-    echo "warning: .tools/verus is at $built, Cargo.lock pins $rev" >&2
+    verus="$(nix build --no-link --print-out-paths "$PORT_ROOT#verus")/bin/rust_verify"
 fi
 
 # Verus writes nothing we keep; run it outside the source tree.

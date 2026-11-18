@@ -41,7 +41,7 @@ command.
 | `cmake/` | The CMake toolchain file for C code in an Atmosphere process. |
 | `tools/` | Build and run scripts. |
 | `tests/` | The hello program, the runtime tests, the kernel preemption test, and the project that builds the OSAL tests. |
-| `flake.nix` | The development shell. |
+| `flake.nix` | The development shell, and Verus as a package at the revision the kernel uses. |
 
 The two submodules pin the tested combination. `ATMO_ROOT` and `CFS_ROOT`
 point the scripts at other checkouts.
@@ -68,7 +68,7 @@ Then:
 
     tests/rt/build.sh && tools/run-qemu.sh out/rt/rt_test.elf
     tests/preempt/build.sh && tools/run-qemu.sh out/preempt/preempt_test.elf
-    tools/verify-atmosphere.sh     # Verus on the kernel; the first run builds Verus
+    tools/verify-atmosphere.sh     # Verus on the kernel; the first run builds Verus (nix build .#verus)
 
     cmake -S tests/osal -B out/osal-tests \
           -DCMAKE_TOOLCHAIN_FILE=$PWD/cmake/toolchain-x86_64-atmosphere.cmake \
