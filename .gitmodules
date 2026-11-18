@@ -1,7 +1,7 @@
 [submodule "atmosphere"]
 	path = atmosphere
 	url = https://github.com/mars-research/atmosphere.git
-	branch = cfs-port
+	branch = main
 [submodule "cFS"]
 	path = cFS
 	url = https://github.com/nasa/cFS.git

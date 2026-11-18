@@ -6,10 +6,10 @@ cFE, OSAL shared layer, PSP shared layer, and applications.
 
 ## Status
 
-Tested under QEMU (software emulation) on the public Atmosphere kernel, branch
-`cfs-port`, which is `toolchain-1.99-bench` plus the runtime. The only kernel
-change is timer preemption (see "Kernel change" below); the port does not
-depend on it.
+Tested under QEMU (software emulation) on the public Atmosphere kernel, at the
+commit that the `atmosphere/` submodule pins. That tree has the C runtime and
+one kernel change, timer preemption (see "Kernel change" below); the port does
+not depend on the preemption.
 
 | Check | Command | Result |
 |---|---|---|
@@ -29,7 +29,7 @@ command.
 
 | Path | Contents |
 |---|---|
-| `atmosphere/` | Submodule: the Atmosphere kernel, branch `cfs-port` of `mars-research/atmosphere`. |
+| `atmosphere/` | Submodule: the Atmosphere kernel, `main` of `mars-research/atmosphere`. |
 | `atmosphere/user/atmo-rt/` | The C runtime, in Rust: program entry, console, clock, tasks, mutexes, semaphores, queues, in-memory files. C interface in `include/atmo_rt.h`. |
 | `cFS/` | Submodule: the NASA cFS bundle at `1847c75`, unmodified. |
 | `libc/` | A freestanding C library: strings, `snprintf`, `strtoul`, time conversion. A heap and file streams for test programs only. |

@@ -7,7 +7,7 @@ build, test, and change things without relearning it.
 ## Repositories
 
 - This repository holds the port only.
-- `atmosphere/` is a submodule: `mars-research/atmosphere`, branch `cfs-port`.
+- `atmosphere/` is a submodule: `mars-research/atmosphere`, branch `main`.
   It carries the kernel, the C runtime (`user/atmo-rt`), and the verified
   kernel (`kernel/verified`).
 - `cFS/` is a submodule: `nasa/cFS`, unmodified. Do not edit it. The only
@@ -102,7 +102,7 @@ CMake caches hold absolute paths.
 
 - Commit only when asked. The author is the user's git identity, and the
   message ends with the Claude co-author trailer.
-- A change in `atmosphere/` is committed there first, on `cfs-port`, and
+- A change in `atmosphere/` is committed there first, on `main`, and
   pushed. Then the submodule pointer is committed here. In the other order
   this repository names a commit that GitHub does not have.
 - The submodule's `origin` is the HTTPS URL, for anonymous clones. Pushing
