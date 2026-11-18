@@ -61,9 +61,6 @@ sit on its block, wake, and priority calls. These answers decide how.
   console log as the reference. Not done yet.
 - **KVM and hardware.** Everything so far ran under QEMU software emulation.
 - **Calibrate the time slice.** It is a raw timer count today.
-- **Upstream the verified changes.** The timer preemption under
-  `kernel/verified` has to land in the repository that the verified kernel is
-  synced from.
 - **Two instances.** Run two cFS instances in two processes and connect them
   with the Software Bus Network application (`apps/sbn`), with a transport
   over an Atmosphere endpoint in place of its UDP transport.

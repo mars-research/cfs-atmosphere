@@ -94,9 +94,9 @@ CMake caches hold absolute paths.
   function you touched.
 - The Verus revision in `flake.lock` must be the one `atmosphere/Cargo.lock`
   pins for vstd. The verify script warns; fix with `nix flake update verus`.
-- The verified kernel is synced into `mars-research/atmosphere` from another
-  repository. A change under `kernel/verified` has to land there too, or the
-  next sync overwrites it.
+- `kernel/verified` is developed in `mars-research/atmosphere` itself. It was
+  imported from another repository once, in November 2024, and has been
+  edited in place since.
 
 ## Commits and pushes
 

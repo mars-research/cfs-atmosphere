@@ -147,8 +147,8 @@ Unverified part (`kernel/src`):
   the next thread was preempted.
 - `main.rs`, `thread.rs`: the timer is armed before the first process starts.
 
-The verified kernel is synced from another repository, so the changes under
-`kernel/verified` have to land there to survive the next sync.
+Both parts are on `main` of `mars-research/atmosphere`, which is where the
+verified kernel is developed.
 
 Not done: the time slice is an uncalibrated timer count (about 1.3 ms
 under QEMU); a thread keeps the CPU when the run queue is full (10 entries);
