@@ -42,6 +42,7 @@ command.
 | `tools/` | Build and run scripts. |
 | `tests/` | The hello program, the runtime tests, the kernel preemption test, and the project that builds the OSAL tests. |
 | `flake.nix` | The development shell, and Verus as a package at the revision the kernel uses. |
+| `docs/open-questions.md` | What the port still needs from the kernel, the questions that decide the next design, and the next steps. |
 
 The two submodules pin the tested combination. `ATMO_ROOT` and `CFS_ROOT`
 point the scripts at other checkouts.
