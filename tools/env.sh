@@ -16,11 +16,6 @@ fi
 ATMO_ROOT="$(cd "$ATMO_ROOT" && pwd)"
 [ -d "$CFS_ROOT" ] && CFS_ROOT="$(cd "$CFS_ROOT" && pwd)"
 
-# Inside `nix develop` the tools are already on PATH.
-if [ -z "${IN_NIX_SHELL:-}" ] && [ -d "$PORT_ROOT/.tools/bin" ]; then
-    PATH="$PORT_ROOT/.tools/bin:$PATH"
-fi
-
 # rust-lld and the LLVM binutils ship with the Rust toolchain.
 RUST_SYSROOT="$(cd "$ATMO_ROOT" && rustc --print sysroot)"
 RUST_HOST="$(cd "$ATMO_ROOT" && rustc -vV | sed -n 's/^host: //p')"
