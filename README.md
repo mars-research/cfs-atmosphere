@@ -4,21 +4,27 @@ A port of NASA's core Flight System (cFS) to the Atmosphere microkernel on
 x86-64. The flight software runs as one Atmosphere process, with unmodified
 cFE, OSAL shared layer, PSP shared layer, and applications.
 
+The kernel is the concurrent version of Atmosphere,
+`mars-research/atmosphere-smp`. It is a clone of VeriFlat
+(`FeizaiYiHao/VeriFlat`), the name the kernel has in its sources. The port first ran on the earlier, single-processor kernel
+(`mars-research/atmosphere`); the last commit of this repository on that
+kernel is `3e399dc`.
+
 ## Status
 
-Tested under QEMU (software emulation) on the public Atmosphere kernel, at the
-commit that the `atmosphere/` submodule pins. That tree has the C runtime and
-one kernel change, timer preemption (see "Kernel change" below); the port does
-not depend on the preemption.
+Tested under QEMU (software emulation) on the kernel commit that the
+`atmosphere-smp/` submodule pins: upstream `516f22f5` plus two commits (see
+"Kernel" below).
 
 | Check | Command | Result |
 |---|---|---|
 | C program prints through the kernel | `tests/hello/build.sh` | passes |
-| Runtime: tasks, priorities, clock, queues | `tests/rt/build.sh` | 4,190 checks pass |
+| Runtime: tasks, priorities, clock, queues | `tests/rt/build.sh` | 4,191 checks pass |
 | OSAL functional tests (`osal/src/tests`) | `tools/run-osal-tests.sh` | 19 of 19 programs pass |
 | cFE with five applications | `tools/test-cfs.sh` | all checks pass |
-| Kernel: timer preemption of two threads | `tests/preempt/build.sh` | 14 checks pass |
-| Kernel: Verus on `kernel/verified` | `tools/verify-atmosphere.sh` | 524 verified, 0 errors |
+| Kernel: two threads, preemption and thread switches | `tests/preempt/build.sh` | 20 checks pass |
+| Kernel: its own self-test (`boot/dom0`), 4 processors | `atmosphere-smp/boot/run.sh` | passes |
+| Kernel: Verus | `tools/verify-atmosphere.sh` | 5017 verified, 0 errors |
 
 `tools/test-cfs.sh` boots the flight software and checks that the cFE reaches
 its OPERATIONAL state, that a no-op command raises the command counter of
@@ -29,8 +35,8 @@ command.
 
 | Path | Contents |
 |---|---|
-| `atmosphere/` | Submodule: the Atmosphere kernel, `main` of `mars-research/atmosphere`. |
-| `atmosphere/user/atmo-rt/` | The C runtime, in Rust: program entry, console, clock, tasks, mutexes, semaphores, queues, in-memory files. C interface in `include/atmo_rt.h`. |
+| `atmosphere-smp/` | Submodule: the kernel, `main` of `mars-research/atmosphere-smp`. Its `boot/` directory has the loader, the trap layer, and the syscall stubs (`vsys`). |
+| `rt/` | The C runtime, in Rust: program entry, console, clock, tasks, mutexes, semaphores, queues, in-memory files. C interface in `include/atmo_rt.h`. Only `src/sys.rs` makes system calls. |
 | `cFS/` | Submodule: the NASA cFS bundle at `1847c75`, unmodified. |
 | `libc/` | A freestanding C library: strings, `snprintf`, `strtoul`, time conversion. A heap and file streams for test programs only. |
 | `osal/atmosphere/` | The OSAL per-OS layer (`OSAL_SYSTEM_OSTYPE=atmosphere`). |
@@ -40,26 +46,30 @@ command.
 | `apps/ci_test`, `apps/to_test` | Command ingest from a built-in script, and telemetry output to the console. They stand in for `ci_lab` and `to_lab`, which need UDP. |
 | `cmake/` | The CMake toolchain file for C code in an Atmosphere process. |
 | `tools/` | Build and run scripts. |
-| `tests/` | The hello program, the runtime tests, the kernel preemption test, and the project that builds the OSAL tests. |
-| `flake.nix` | The development shell, and Verus as a package at the revision the kernel uses. |
+| `tests/` | The hello program, the runtime tests, the kernel thread test, and the project that builds the OSAL tests. |
+| `flake.nix` | The development shell. |
 | `docs/open-questions.md` | What the port still needs from the kernel, the questions that decide the next design, and the next steps. |
 
-The two submodules pin the tested combination. `ATMO_ROOT` and `CFS_ROOT`
-point the scripts at other checkouts.
+The two submodules pin the tested combination. `ATMO_ROOT` (the kernel tree)
+and `CFS_ROOT` point the scripts at other checkouts.
 
 ## Build and run
 
 Get the submodules, then enter the development shell:
 
-    git submodule update --init --recursive
+    tools/get-submodules.sh
     nix develop
+
+`tools/get-submodules.sh` fetches the kernel, a shallow copy of the Verus
+inside it (the build needs its `vstd` sources), and cFS. A recursive
+submodule update works too, but fetches the whole history of Verus.
 
 The shell provides rustup, a clang cross compiler (`atmo-cc`), CMake, nasm,
 GNU `ld` and `objcopy` for x86-64 ELF, `xxd`, and QEMU. It is tested on macOS
 (Apple silicon); it also declares Linux, which is not tested yet. Rust itself
-comes from rustup, which reads
-`atmosphere/rust-toolchain.toml` (Rust 1.99.1). Without nix, put the same
-tools on `PATH` and set `ATMO_CC` to a clang with the x86-64 backend.
+comes from rustup; the scripts select the toolchain that
+`atmosphere-smp/boot/rust-toolchain.toml` names (Rust 1.99.1). Without nix, put the
+same tools on `PATH` and set `ATMO_CC` to a clang with the x86-64 backend.
 
 Then:
 
@@ -69,7 +79,7 @@ Then:
 
     tests/rt/build.sh && tools/run-qemu.sh out/rt/rt_test.elf
     tests/preempt/build.sh && tools/run-qemu.sh out/preempt/preempt_test.elf
-    tools/verify-atmosphere.sh     # Verus on the kernel; the first run builds Verus (nix build .#verus)
+    tools/verify-atmosphere.sh     # Verus on the kernel; the first run builds Verus
 
     cmake -S tests/osal -B out/osal-tests \
           -DCMAKE_TOOLCHAIN_FILE=$PWD/cmake/toolchain-x86_64-atmosphere.cmake \
@@ -77,96 +87,103 @@ Then:
     cmake --build out/osal-tests -j8
     tools/run-osal-tests.sh
 
-`tools/run-qemu.sh <image> [seconds]` boots any image as the first Atmosphere
-process and exits with the code that the image passed to `art_exit()`. Set
-`ATMO_QEMU_ACCEL=kvm` on a Linux host and `ATMO_QEMU_RAW=1` for the whole
-serial log.
+`tools/run-qemu.sh <image> [seconds]` boots any image as the first process and
+exits with the code that the image passed to `art_exit()`. It prints what the
+image wrote and the kernel's warnings; `ATMO_QEMU_RAW=1` prints the whole
+serial log. `ATMO_QEMU_SMP=4` gives the machine four processors.
+
+QEMU without KVM emulates neither PCID nor INVPCID, which the kernel needs,
+so by default the scripts build the kernel with its feature `no-pcid`. On a
+Linux host with KVM, set `ATMO_QEMU_ACCEL=kvm` for both the build and the
+run; the kernel is then built without the feature. This path is not tested
+yet.
 
 ## How it works
 
-**One process, booted as the first process.** The Atmosphere loader already
-loads a position-independent ELF as the first process. The image is that ELF.
-A tar archive of the `/cf` volume (startup script, table files) follows it in
-the boot module; the kernel passes it to the process as the boot payload, and
-the PSP registers its files in the runtime's in-memory file system.
+**One process, booted as the first process.** The loader already loads a
+position-independent ELF as the first process (`dom0`). The image is that
+ELF. A tar archive of the `/cf` volume (startup script, table files) follows
+it in the boot module; the kernel passes it to the process as the boot
+payload, and the PSP registers its files in the runtime's in-memory file
+system.
 
-**The runtime schedules the tasks.** The public kernel runs one processor,
-has no thread priorities, and cannot wake a chosen thread or wake a thread
-after a timeout. The runtime therefore runs all tasks inside one kernel
-thread: strict priority with 256 levels, mutexes with priority inheritance,
-waits with deadlines on the timestamp counter. It needs only `mmap` and the
-console call from the kernel.
+**The runtime schedules the tasks.** The kernel has threads, runs them on
+several processors, and preempts them on a timer. It schedules them
+round-robin without priorities, and it cannot wake a thread after a timeout.
+The runtime therefore still runs all tasks inside one kernel thread: strict
+priority with 256 levels, mutexes with priority inheritance, waits with
+deadlines on the timestamp counter. From the kernel it needs the console
+call, the exit call, `mmap_4k` with the two quota calls, and the rate of the
+timestamp counter.
 
-The synchronization objects (`src/sync.rs`) use only the block, wake, and
-priority calls of the scheduler (`src/task.rs`). A scheduler on kernel threads
-can replace `task.rs` behind those calls when the kernel can block a thread
-with a timeout.
+The synchronization objects (`rt/src/sync.rs`) use only the block, wake, and
+priority calls of the scheduler (`rt/src/task.rs`). A scheduler on kernel
+threads can replace `task.rs` behind those calls.
+`docs/open-questions.md` says what the kernel offers for that and what is
+missing.
+
+**Memory is paid for with quota.** A thread pays for the pages it maps, and
+for the page tables under them, from its own quota, which it takes from its
+process and its container. The kernel has no call that reads the quota, so
+`rt/src/sys.rs` keeps count.
 
 **Static applications.** Applications are linked into the cFE executable and
 listed in `cpu1_STATIC_APPLIST` and `cpu1_STATIC_SYMLIST` in
 `atmo_defs/targets.cmake`. The cFE name in each symbol pair must match the
 fourth field of the application's line in the startup script.
 
-**General-purpose registers only.** The kernel does not save vector or
-floating-point state, so all C code is compiled with `-mgeneral-regs-only`.
-Code that uses `float` or `double` does not compile.
+**General-purpose registers only.** The kernel turns floating point off for
+user code: an x87, SSE, or AVX instruction faults and the thread exits. All C
+code is compiled with `-mgeneral-regs-only`, so code that uses `float` or
+`double` does not compile. The runtime is built for the Rust target
+`x86_64-unknown-none`, which has no SSE either.
 
-## Kernel change
+## Kernel
 
-The kernel now ends a thread's time slice on the local APIC timer and runs
-the next thread of the container's run queue (round-robin, no priorities).
+The submodule is `mars-research/atmosphere-smp`, a clone of
+`FeizaiYiHao/VeriFlat` (the remote `upstream` in `atmosphere-smp/`). Its
+`main` is upstream `main` plus two commits to trusted code:
 
-Verified part (`kernel/verified`, checked by `tools/verify-atmosphere.sh`):
+- `no-pcid`, a build feature for QEMU without KVM, which has no PCID and no
+  INVPCID. Every CR3 load then writes the page-table root alone and flushes
+  the TLB; a flush of one PCID becomes a CR3 reload and a flush of one
+  address `invlpg`. The TLB holds a subset of what it holds with PCIDs. The
+  default build keeps its code. The one change under `src/` is a `cfg` in the
+  body of `CpuTLB::write_cr3_pcid`, which Verus does not check.
+- `NR_DEBUG_TSC_HZ`, a trap-layer call that reports the rate of the timestamp
+  counter. A process has no I/O ports and cannot measure it. The kernel
+  measures the rate against the interval timer at boot when CPUID does not
+  report it; before, it assumed 3 GHz, which is 3x off under QEMU.
 
-- `kernel/kernel_timer_interrupt.rs`: `Kernel::timer_interrupt`, the entry
-  point. It preserves the kernel invariant and either changes nothing or
-  switches threads as `ProcessManager::preempt_spec` states: the thread that
-  ran goes to the tail of the run queue and the head of the queue runs.
-- `process_manager/impl_preempt.rs`: `preempt_running_thread`, and the two
-  functions that save and hand back the whole context of a preempted thread.
-  They are verified code, not new trusted setters.
-- `trap.rs`: the trap frame records whether it holds the whole context
-  (`preempted`). The existing run-queue functions save and restore only the
-  registers that a syscall preserves.
-- `kernel/schedule_idle_cpu.rs`: a preempted thread gets every register back,
-  and the return value says so (`SwitchDecision::SwitchPreempted`).
-- `process_manager/impl_base.rs`: `pop_scheduler_for_idle_cpu` states which
-  thread it returns. One existing proof, `set_container_mem_quota_mem_4k`,
-  needed twice the default solver limit after the trap frame grew by a field.
+Neither commit touches a specification, a proof, or verified code, and the
+kernel verifies as before. They are not upstream yet.
 
-Unverified part (`kernel/src`):
+The kernel's `dom0` self-test never causes a remote TLB flush.
+`docs/tlb-shootdown-test.diff` is a test that does: a thread on another
+processor reads a page while the first thread unmaps and remaps it. It was
+used to check the NMI flush path of the `no-pcid` build and is not part of
+the kernel tree.
 
-- `syscalls/mod.rs`: syscalls run with interrupts off (`IA32_FMASK`). The two
-  selector bases in `STAR` were swapped, so user code ran with the selector of
-  a data descriptor in CS; `sysret` does not check this, but the `iret` of an
-  interrupt does.
-- `gdt/mod.rs`: kernel code now precedes kernel data, the order `syscall`
-  expects.
-- `kernel/mod.rs`: `timer_preempt` calls the verified entry point and loads
-  the address space; `sys_receive_empty` leaves through the `iret` path when
-  the next thread was preempted.
-- `main.rs`, `thread.rs`: the timer is armed before the first process starts.
-
-Both parts are on `main` of `mars-research/atmosphere`, which is where the
-verified kernel is developed.
-
-Not done: the time slice is an uncalibrated timer count (about 1.3 ms
-under QEMU); a thread keeps the CPU when the run queue is full (10 entries);
-vector and floating-point state is not saved; a CPU with no runnable thread
-still panics in `sys_receive_empty`; the second processor is not started.
+`tests/preempt` runs two kernel threads of one process. A thread loses the
+processor to the timer or inside a system call and gets it back from the
+timer or from the other thread's system call; the test covers the four
+combinations and checks every general-purpose register across each.
 
 ## Limits
 
 - The runtime does not preempt its tasks. A task that computes for a long
   time without an OSAL call delays every other task, timers included.
-  `art_poll()` lets such a task give way. The kernel now preempts kernel
-  threads, but all tasks share one kernel thread.
-- Tested under QEMU software emulation only, not under KVM or on hardware.
-- Two checks in `tests/rt` bound wall-clock times (a sleep within 1 ms, the
-  clock within 2%). They fail now and then when the host is busy, on the
-  original kernel as well.
-- Clock calibration and the QEMU exit device use I/O ports, which only the
-  first process may access.
+  `art_poll()` lets such a task give way. The kernel preempts kernel threads,
+  but all tasks share one kernel thread, on one processor.
+- Tested under QEMU software emulation only, with the `no-pcid` kernel. The
+  default build needs KVM or hardware, where the port has not run.
+- One check in `tests/rt` bounds a wall-clock time (a sleep within 1 ms). It
+  can fail when the host is busy.
+- Nothing checks the clock against a second clock. A process has no I/O
+  ports, so the earlier comparison with the real-time clock is gone; the
+  runtime trusts the rate that the kernel measured.
+- A sleeping runtime spins; it does not give the processor back to the
+  kernel.
 - No network, no dynamic loading, no floating point. Condition variables and
   readers-writer locks return "not implemented".
 - The local clock starts at zero; nothing reads a real-time clock.
@@ -179,4 +196,4 @@ still panics in `sys_receive_empty`; the second processor is not started.
 ## License
 
 Apache-2.0, see `LICENSE`. The files derived from NASA cFS keep their notices.
-The submodules have their own licenses: Atmosphere is MIT, cFS is Apache-2.0.
+The submodules have their own licenses: the kernel is MIT, cFS is Apache-2.0.

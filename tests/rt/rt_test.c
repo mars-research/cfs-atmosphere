@@ -85,59 +85,40 @@ static void test_token(void)
     CHECK(!art_task_valid(b));
 }
 
-/* ---- The clock against the real-time clock of the machine ---- */
+/* ---- The clock ---- */
 
-static inline void outb(uint16_t port, uint8_t v)
-{
-    __asm__ volatile("outb %0, %1" : : "a"(v), "Nd"(port));
-}
-static inline uint8_t inb(uint16_t port)
-{
-    uint8_t v;
-    __asm__ volatile("inb %1, %0" : "=a"(v) : "Nd"(port));
-    return v;
-}
-
-static int rtc_seconds(void)
-{
-    uint8_t s;
-    do {
-        outb(0x70, 0x0a);
-    } while (inb(0x71) & 0x80); /* an update is in progress */
-    outb(0x70, 0x00);
-    s = inb(0x71);
-    return s;
-}
-
-/* Waits for the seconds of the real-time clock to change. */
-static uint64_t rtc_edge(void)
-{
-    int      s        = rtc_seconds();
-    uint64_t deadline = art_clock_ns() + 3000 * MS;
-    while (rtc_seconds() == s) {
-        if (art_clock_ns() > deadline)
-            return 0;
-    }
-    return art_clock_ns();
-}
-
+/* A process has no I/O ports, so it cannot compare the clock with the
+ * real-time clock of the machine. The kernel measures the timestamp counter
+ * against the interval timer at boot; this checks what the runtime made of
+ * it. */
 static void test_clock(void)
 {
-    uint64_t first, last, span;
-    int      seconds = 3;
+    uint64_t hz = art_clock_counter_hz();
+    uint64_t t0, t1, ticks = 0;
 
-    printf("  timestamp counter: %lu Hz\n", (unsigned long)art_clock_counter_hz());
-    first = rtc_edge();
-    CHECK(first != 0);
-    last = first;
-    for (int i = 0; i < seconds; i++)
-        last = rtc_edge();
-    CHECK(last != 0);
-    span = last - first;
-    printf("  %d seconds of the real-time clock measured as %lu ms\n", seconds,
-           (unsigned long)(span / MS));
-    /* Within 2 percent. */
-    CHECK(span > (uint64_t)seconds * 980 * MS && span < (uint64_t)seconds * 1020 * MS);
+    printf("  timestamp counter: %lu Hz%s\n", (unsigned long)hz,
+           art_clock_calibrated() ? "" : " (assumed)");
+    CHECK(art_clock_calibrated());
+    CHECK(hz >= 100 * 1000 * 1000ull && hz <= 10 * 1000 * 1000 * 1000ull);
+
+    /* The clock advances, never goes backward, and counts in nanoseconds:
+     * a spin of 50 ms of counter ticks takes 50 ms of the clock. */
+    t0 = art_clock_ns();
+    {
+        uint64_t start = __builtin_ia32_rdtsc(), last = t0;
+        int      backward = 0;
+        while ((ticks = __builtin_ia32_rdtsc() - start) < hz / 20) {
+            uint64_t now = art_clock_ns();
+            if (now < last)
+                backward = 1;
+            last = now;
+        }
+        CHECK(!backward);
+    }
+    t1 = art_clock_ns();
+    printf("  %lu counter ticks measured as %lu us\n", (unsigned long)ticks,
+           (unsigned long)((t1 - t0) / 1000));
+    CHECK(t1 - t0 >= 50 * MS && t1 - t0 < 100 * MS);
 }
 
 static void test_sleep(void)

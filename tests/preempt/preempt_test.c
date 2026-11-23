@@ -1,13 +1,14 @@
-/* Test of timer preemption in the Atmosphere kernel.
+/* Test of timer preemption and of thread switches in the kernel.
  *
- * Two kernel threads of one process share the CPU. Neither yields, so each
- * can only run when the timer interrupt takes the CPU from the other. The
- * test covers the four ways a thread gets the CPU back:
+ * Two kernel threads of one process share the CPU. A thread loses the CPU to
+ * the timer interrupt or inside a system call, and gets it back from the
+ * timer interrupt or from the system call of the other thread. The test
+ * covers the four combinations:
  *
- *   1. preempted, resumed by the timer   (phase 1)
- *   2. preempted, resumed by a syscall   (phase 2: the main thread blocks)
- *   3. in a syscall, resumed by a syscall (phase 2: the worker's send)
- *   4. in a syscall, resumed by the timer (phase 3)
+ *   1. preempted, resumed by the timer    (phase 1: neither thread yields)
+ *   2. preempted, resumed by a syscall    (phases 2 and 3)
+ *   3. in a syscall, resumed by the timer (phases 2 and 3)
+ *   4. in a syscall, resumed by a syscall (phase 4: both threads yield)
  *
  * While a thread spins it holds a known value in every general-purpose
  * register and in the carry flag, and checks them afterwards. Across a
@@ -22,11 +23,17 @@
 
 #include "atmo_rt.h"
 
-/* Kernel system calls (atmosphere/asys/src/lib.rs). */
-#define NR_NEW_ENDPOINT     3
-#define NR_NEW_THREAD       6
-#define NR_RECEIVE_EMPTY    10
-#define NR_SEND_EMPTY_TRY   20
+/* Kernel system calls (atmosphere-smp/boot/vsys/src/lib.rs). */
+#define NR_ALLOC_QUOTA_4K           2
+#define NR_SCHEDULE                 3
+#define NR_NEW_THREAD_WITH_ENDPOINT 7
+#define NR_RECEIVE_EMPTY            15
+#define NR_SEND_EMPTY_NO_BLOCK      16
+#define NR_ALLOC_THREAD_QUOTA_4K    27
+
+/* The first thread holds the root endpoint in descriptor 0. The worker gets
+ * the same endpoint in its descriptor 0. */
+#define ENDPOINT 0
 
 #define SECOND      1000000000ull
 #define SPIN_COUNT  100000      /* a fraction of a time slice under QEMU */
@@ -163,7 +170,9 @@ static long kernel_call(long nr, long a, long b, long c)
 static volatile uint64_t worker_rounds;
 static volatile uint64_t worker_errors;
 static volatile uint64_t worker_send_calls;
+static volatile uint64_t worker_yields;
 static volatile int      send_request;
+static volatile int      yield_request;
 static volatile int      main_awake;
 
 static uint8_t worker_stack[64 * 1024] __attribute__((aligned(16)));
@@ -175,10 +184,14 @@ static void worker(void)
         worker_errors += spin_check(SPIN_COUNT);
         worker_rounds++;
         if (send_request && !main_awake) {
-            /* Wakes the main thread if it waits on the endpoint, and gives it
-             * the CPU. Has no effect otherwise. */
+            /* Makes the main thread runnable if it waits on the endpoint,
+             * and fails otherwise. The worker keeps the CPU either way. */
             worker_send_calls++;
-            worker_errors += syscall_check(NR_SEND_EMPTY_TRY, 0);
+            worker_errors += syscall_check(NR_SEND_EMPTY_NO_BLOCK, ENDPOINT);
+        }
+        if (yield_request) {
+            worker_yields++;
+            worker_errors += syscall_check(NR_SCHEDULE, 0);
         }
     }
 }
@@ -223,10 +236,12 @@ int main(void)
 
     printf("preemption test\n");
 
-    CHECK(kernel_call(NR_NEW_ENDPOINT, 0, 0, 0) == 0);
+    /* A new thread costs its creator one page of quota. */
+    CHECK(kernel_call(NR_ALLOC_QUOTA_4K, 4, 0, 0) == 0);
+    CHECK(kernel_call(NR_ALLOC_THREAD_QUOTA_4K, 4, 0, 0) == 0);
     /* As after a call: the stack pointer is 8 below a multiple of 16. */
     uintptr_t sp = (uintptr_t)worker_stack + sizeof(worker_stack) - 8;
-    CHECK(kernel_call(NR_NEW_THREAD, 0, (long)(uintptr_t)worker, (long)sp) == 0);
+    CHECK(kernel_call(NR_NEW_THREAD_WITH_ENDPOINT, ENDPOINT, (long)(uintptr_t)worker, (long)sp) >= 0);
     if (failures != 0) {
         printf("could not start the worker thread\n");
         return 1;
@@ -235,7 +250,7 @@ int main(void)
     /* Phase 1. Neither thread enters the kernel on its own. */
     uint64_t t0       = art_clock_ns();
     uint64_t w0       = worker_rounds;
-    uint64_t switches = spin_until_worker_ran(2000, 30 * SECOND, &main_rounds, &main_errors);
+    uint64_t switches = spin_until_worker_ran(2000, 60 * SECOND, &main_rounds, &main_errors);
     uint64_t elapsed  = art_clock_ns() - t0;
     uint64_t w_rounds = worker_rounds - w0;
     printf("phase 1: %llu ms, main %llu rounds, worker %llu rounds, "
@@ -253,30 +268,49 @@ int main(void)
                (unsigned long long)(elapsed / 1000 / (2 * switches)));
 
     /* Phase 2. The main thread blocks on the endpoint. The worker, which lost
-     * the CPU to the timer, is resumed from inside this syscall. It then sends
-     * on the endpoint, which resumes the main thread from the worker's
-     * syscall. */
+     * the CPU to the timer, is resumed from inside this syscall. Its send
+     * makes the main thread runnable, and the timer then takes the CPU from
+     * the worker and resumes the main thread, which is still in its syscall. */
     uint64_t sends_before = worker_send_calls;
     send_request = 1;
-    uint64_t saved_errors = syscall_check(NR_RECEIVE_EMPTY, 0);
-    uint64_t w1 = worker_rounds;
+    uint64_t saved_errors = syscall_check(NR_RECEIVE_EMPTY, ENDPOINT);
     main_awake = 1;
+    send_request = 0;
     printf("phase 2: main thread blocked and was woken, worker made %llu send calls\n",
            (unsigned long long)(worker_send_calls - sends_before));
     CHECK(saved_errors == 0);
     CHECK(worker_send_calls > sends_before);
     CHECK(worker_errors == 0);
 
-    /* Phase 3. The worker waits in the run queue inside its send syscall. The
-     * main thread does not enter the kernel, so only the timer can resume the
-     * worker. */
+    /* Phase 3. The worker yields after every round and the main thread never
+     * enters the kernel. The worker, inside its yield, is resumed by the
+     * timer; the main thread, preempted, is resumed by the worker's yield. */
     uint64_t rounds3 = 0, errors3 = 0;
-    switches = spin_until_worker_ran(500, 30 * SECOND, &rounds3, &errors3);
-    printf("phase 3: worker ran %llu more rounds after its syscall\n",
-           (unsigned long long)(worker_rounds - w1));
-    CHECK(worker_rounds - w1 >= 500);
+    uint64_t w1 = worker_rounds, y1 = worker_yields;
+    yield_request = 1;
+    switches = spin_until_worker_ran(200, 60 * SECOND, &rounds3, &errors3);
+    printf("phase 3: worker ran %llu rounds and yielded %llu times\n",
+           (unsigned long long)(worker_rounds - w1), (unsigned long long)(worker_yields - y1));
+    CHECK(worker_rounds - w1 >= 200);
+    CHECK(worker_yields - y1 >= 200);
     CHECK(switches >= 5);
     CHECK(errors3 == 0);
+    CHECK(worker_errors == 0);
+
+    /* Phase 4. Both threads yield: each is resumed from the yield of the
+     * other. */
+    uint64_t w2 = worker_rounds, errors4 = 0, yields4 = 0;
+    uint64_t limit = art_clock_ns() + 60 * SECOND;
+    while (worker_rounds - w2 < 200 && art_clock_ns() < limit) {
+        errors4 += syscall_check(NR_SCHEDULE, 0);
+        yields4++;
+    }
+    yield_request = 0;
+    printf("phase 4: main yielded %llu times, worker ran %llu rounds\n",
+           (unsigned long long)yields4, (unsigned long long)(worker_rounds - w2));
+    CHECK(worker_rounds - w2 >= 200);
+    CHECK(yields4 >= 100);
+    CHECK(errors4 == 0);
     CHECK(worker_errors == 0);
 
     printf("%d checks, %d failures\n", checks, failures);

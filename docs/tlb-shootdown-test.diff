@@ -1,0 +1,92 @@
+--- a/boot/dom0/src/main.rs	2026-11-23 11:25:50
++++ b/boot/dom0/src/main.rs	2026-11-23 11:25:50
+@@ -596,8 +596,81 @@
+     ok(NR_KILL_CONTAINER, unsafe { sys_kill_container(1) });
+     ok(NR_KILL_CONTAINER, unsafe { sys_kill_container(0) });
+     expect_error("kill_container without children", unsafe { sys_kill_container(0) }, "ErrorInvalidChild");
++}
++
++
++// TEMPORARY TLB-shootdown experiment, not for commit: a dom0 thread on another CPU reads VA_X, dom0 unmaps it, maps
++// soak pages that likely reuse the freed frame, maps VA_X again; a stale translation on the reader's CPU reads SOAK.
++static XREQ: AtomicU64 = AtomicU64::new(0);
++static XACK: AtomicU64 = AtomicU64::new(0);
++static XVAL: AtomicU64 = AtomicU64::new(0);
++static XCPU: AtomicUsize = AtomicUsize::new(0);
++static XMAIN_CPU: AtomicUsize = AtomicUsize::new(usize::MAX);
++static XCOUNTS: [AtomicUsize; 4] = [const { AtomicUsize::new(0) }; 4];
++static mut READER_STACK: [u8; 16384] = [0; 16384];
++const VA_X: usize = 0xc9_0000_0000;
++const VA_SOAK: usize = 0xca_0000_0000;
++const SOAK: u64 = 0xdead_dead_dead_dead;
++
++extern "C" fn reader_forever() -> ! {
++    let mut last = 0;
++    loop {
++        let req = XREQ.load(Ordering::SeqCst);
++        if req == u64::MAX {
++            unsafe { syscall0(NR_THREAD_EXIT) };
++        }
++        if req != last {
++            let v = unsafe { (VA_X as *const u64).read_volatile() };
++            XVAL.store(v, Ordering::SeqCst);
++            XCPU.store(current_cpu(), Ordering::SeqCst);
++            XACK.store(req, Ordering::SeqCst);
++            last = req;
++        }
++        if current_cpu() == XMAIN_CPU.load(Ordering::SeqCst) {
++            unsafe { sys_schedule() };
++        } else {
++            core::hint::spin_loop();
++        }
++    }
++}
++
++fn x_read(g: u64) -> (u64, usize) {
++    XMAIN_CPU.store(current_cpu(), Ordering::SeqCst);
++    XREQ.store(g, Ordering::SeqCst);
++    wait_yield("reader", || XACK.load(Ordering::SeqCst) == g);
++    (XVAL.load(Ordering::SeqCst), XCPU.load(Ordering::SeqCst))
+ }
+ 
++fn tlb_experiment() {
++    fund(64);
++    log::info!("tlb: cpu_online(2) {} cpu_online(3) {}", unsafe { sys_cpu_online(2) }, unsafe { sys_cpu_online(3) });
++    ok(NR_NEW_THREAD, unsafe { sys_new_thread(entry(reader_forever), stack_top(&raw const READER_STACK)) });
++    let mut remote = 0;
++    let mut g = 0u64;
++    for _ in 0..300 {
++        g += 2;
++        ok(NR_MMAP_4K, unsafe { sys_mmap_4k(VA_X, 1) });
++        unsafe { (VA_X as *mut u64).write_volatile(g) };
++        let (v, cpu) = x_read(g);
++        if v != g { log::error!("tlb: first read {:#x} expected {:#x}", v, g); unsafe { sys_debug_exit(1) }; }
++        XCOUNTS[cpu & 3].fetch_add(1, Ordering::SeqCst);
++        let main_cpu = current_cpu();
++        ok(NR_UNMAP_4K, unsafe { sys_unmap_4k(VA_X, 1) });
++        ok(NR_MMAP_4K, unsafe { sys_mmap_4k(VA_SOAK, 4) });
++        for i in 0..4 { unsafe { ((VA_SOAK + i * 4096) as *mut u64).write_volatile(SOAK) }; }
++        ok(NR_MMAP_4K, unsafe { sys_mmap_4k(VA_X, 1) });
++        unsafe { (VA_X as *mut u64).write_volatile(g + 1) };
++        let (v, cpu2) = x_read(g + 1);
++        if cpu != main_cpu && cpu2 == cpu { remote += 1; }
++        if v != g + 1 { log::error!("tlb: STALE read {:#x} expected {:#x} (reader cpu {} main cpu {})", v, g + 1, cpu2, main_cpu); unsafe { sys_debug_exit(1) }; }
++        ok(NR_UNMAP_4K, unsafe { sys_unmap_4k(VA_SOAK, 4) });
++        ok(NR_UNMAP_4K, unsafe { sys_unmap_4k(VA_X, 1) });
++    }
++    XREQ.store(u64::MAX, Ordering::SeqCst);
++    log::info!("tlb experiment ok: {} iterations with the reader on another CPU across the unmap; reader CPUs {:?}", remote,
++        [XCOUNTS[0].load(Ordering::SeqCst), XCOUNTS[1].load(Ordering::SeqCst), XCOUNTS[2].load(Ordering::SeqCst), XCOUNTS[3].load(Ordering::SeqCst)]);
++}
++
+ #[no_mangle]
+ pub extern "C" fn _start() -> ! {
+     vsys::logger::init_logging_with_level(log::Level::Info);
+@@ -620,6 +693,7 @@
+     // The plain child, the last child process.
+     ok(NR_KILL_PROCESS, unsafe { sys_kill_process(0) });
+     expect_error("kill_process without children", unsafe { sys_kill_process(0) }, "ErrorInvalidChild");
++    tlb_experiment();
+ 
+     let passed = PASSED.load(Ordering::SeqCst);
+     let mut missing = false;

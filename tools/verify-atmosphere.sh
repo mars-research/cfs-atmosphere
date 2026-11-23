@@ -1,29 +1,29 @@
 #!/usr/bin/env bash
-# Verifies the Atmosphere kernel (atmosphere/kernel/verified) with Verus.
+# Verifies the kernel (atmosphere-smp/src) with Verus.
 #
 #   tools/verify-atmosphere.sh [verus options]
 #
-# This is what `atmo verify` does inside the Atmosphere nix shell. Verus comes
-# from this repository's flake (`nix build .#verus`); the first run builds it,
-# which takes a while. Set VERUS to use another rust_verify.
+# The kernel is verified with the Verus of its own submodule. The first run
+# builds it (atmosphere-smp/verus/source/target-verus), which downloads Z3. The run
+# itself is the kernel's verify.sh; it uses flock, which the nix shell has.
 set -euo pipefail
 . "$(dirname "$0")/env.sh"
-unset RUSTC_BOOTSTRAP   # set by env.sh for the kernel build; Verus must not inherit it
 
-verus="${VERUS:-}"
-if [ -z "$verus" ]; then
-    # The kernel must be verified with the Verus whose vstd it is built with.
-    rev="$(sed -n 's|.*mars-research/verus?branch=mars#\([0-9a-f]*\)".*|\1|p' \
-        "$ATMO_ROOT/Cargo.lock" | head -n 1)"
-    if ! grep -q "\"rev\": \"$rev\"" "$PORT_ROOT/flake.lock"; then
-        echo "warning: flake.lock does not pin Verus $rev, which atmosphere/Cargo.lock uses;" >&2
-        echo "         run: nix flake update verus" >&2
-    fi
-    verus="$(nix build --no-link --print-out-paths "$PORT_ROOT#verus")/bin/rust_verify"
+# Verus pins its own toolchain; do not hand it the one of the kernel build.
+unset RUSTUP_TOOLCHAIN
+if [ ! -x "$ATMO_ROOT/verus/source/target-verus/release/verus" ]; then
+    (
+        cd "$ATMO_ROOT/verus/source"
+        # shellcheck disable=SC1091
+        . ../tools/activate
+        ./tools/get-z3.sh
+        vargo build --release
+    )
 fi
-
-# Verus writes nothing we keep; run it outside the source tree.
-work="$(mktemp -d)"
-trap 'rm -rf "$work"' EXIT
-cd "$work"
-"$verus" --crate-type lib "$ATMO_ROOT/kernel/verified/lib.rs" "$@"
+cd "$ATMO_ROOT"
+status=0
+./verify.sh --num-threads "${ATMO_VERIFY_THREADS:-8}" "$@" || status=$?
+# verify.sh numbers its runs in a tracked file. A run from here is not a
+# change to the kernel; leave the tree as it was.
+git checkout -- .verus-log/verify-count
+exit "$status"

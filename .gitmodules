@@ -1,8 +1,8 @@
-[submodule "atmosphere"]
-	path = atmosphere
-	url = https://github.com/mars-research/atmosphere.git
-	branch = main
 [submodule "cFS"]
 	path = cFS
 	url = https://github.com/nasa/cFS.git
 	ignore = dirty
+[submodule "atmosphere-smp"]
+	path = atmosphere-smp
+	url = https://github.com/mars-research/atmosphere-smp.git
+	branch = main

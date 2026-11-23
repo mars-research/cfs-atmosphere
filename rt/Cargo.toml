@@ -1,0 +1,17 @@
+[package]
+name = "atmo-rt"
+version = "0.1.0"
+edition = "2021"
+publish = false
+description = "C runtime for Atmosphere: tasks, synchronization, time, console"
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+# The syscall stubs of VeriFlat, the concurrent Atmosphere kernel.
+vsys = { path = "../atmosphere-smp/boot/vsys" }
+
+[profile.release]
+panic = "abort"
+opt-level = 2
