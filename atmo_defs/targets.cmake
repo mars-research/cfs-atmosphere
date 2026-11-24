@@ -21,7 +21,7 @@ SET(MISSION_CPUNAMES cpu1)
 SET(cpu1_PROCESSORID 1)
 SET(cpu1_SYSTEM x86_64-atmosphere)
 SET(cpu1_APPLIST)
-SET(cpu1_STATIC_APPLIST sample_lib sample_app sch_lab hk ci_test to_test)
+SET(cpu1_STATIC_APPLIST sample_lib sample_app sch_lab hk ci_test to_test supervisor bus_bridge adcs_sim)
 SET(cpu1_STATIC_SYMLIST
     SAMPLE_LIB_Init,SAMPLE_LIB
     SAMPLE_APP_Main,SAMPLE_APP
@@ -29,5 +29,8 @@ SET(cpu1_STATIC_SYMLIST
     HK_AppMain,HK
     CI_TEST_AppMain,CI_TEST
     TO_TEST_AppMain,TO_TEST
+    SUPERVISOR_AppMain,SUPERVISOR
+    BUS_BRIDGE_AppMain,BUS_BRIDGE
+    ADCS_SIM_AppMain,ADCS_SIM
 )
 SET(cpu1_FILELIST cfe_es_startup.scr)

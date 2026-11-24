@@ -9,6 +9,8 @@ set -euo pipefail
 build="$PORT_ROOT/out/cfs"
 "$PORT_ROOT/tools/build-atmosphere.sh" >/dev/null
 "$PORT_ROOT/libc/build.sh" >/dev/null
+# The bus and the payload of the attack demo, which SUPERVISOR loads from /cf.
+"$PORT_ROOT/tools/build-demo.sh" >/dev/null
 
 # The PSP build has no hook for a directory outside its tree.
 ln -sfn "$PORT_ROOT/psp/pc-atmosphere" "$CFS_ROOT/psp/fsw/pc-atmosphere"
@@ -41,6 +43,7 @@ exe="$build/exe/cpu1"
 for line in $(sed -n 's/^CFE_APP, *\([a-z_0-9]*\),.*/\1/p' "$exe/cf/cfe_es_startup.scr"); do
     : >"$exe/cf/$line.so"
 done
+cp "$PORT_ROOT/out/demo/bus.elf" "$PORT_ROOT/out/demo/payload.elf" "$exe/cf/"
 # macOS tar would add extended-attribute entries without this.
 COPYFILE_DISABLE=1 tar --format=ustar -cf "$build/cf.tar" -C "$exe" cf
 cat "$exe/core-cpu1.elf" "$build/cf.tar" >"$build/cfs-cpu1.img"

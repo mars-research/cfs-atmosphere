@@ -1,0 +1,17 @@
+[package]
+name = "demo-bus"
+version = "0.1.0"
+edition = "2021"
+publish = false
+description = "The message bus of the attack demo: one process in its own container"
+
+[[bin]]
+name = "bus"
+path = "src/main.rs"
+
+[dependencies]
+vsys = { path = "../../atmosphere-smp/boot/vsys" }
+
+[profile.release]
+panic = "abort"
+opt-level = 2

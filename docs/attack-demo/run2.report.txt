@@ -1,0 +1,100 @@
+ID   RESULT SCENARIO
+N    pass   normal traffic before the attacks
+U    pass   MC unmaps what it gave to the containers
+K1a  pass   payload reads memory it does not map
+K1b  pass   payload writes memory it does not map
+K2   pass   payload tries to reach around the bus
+K3   pass   payload takes all the memory it can and spins
+B1   pass   payload sends commands it may not send
+B2   pass   payload sends telemetry under SAMPLE_APP's ID
+B3   pass   pointing request out of range
+B4   pass   malformed packets
+B5   pass   flood
+B6   pass   payload rewrites a record after publishing it
+E    pass   after the attacks
+
+Evidence
+-- N: normal traffic before the attacks
+   SUPERVISOR: started BUS on cpu 1: image 32768 bytes, 272 pages given, 4 kept by MC, 4826 us, tsc 1473300000
+   SUPERVISOR: started PAYLOAD on cpu 2: image 26704 bytes, 148 pages given, 0 kept by MC, 2267 us, tsc 1545002000
+   TO_TEST: IMAGER_HK     cmd=0 err=0 counter=0 attacks=0 generation=1 tsc=1753860000
+   ADCS_SIM: SET_POINTING roll=1000 pitch=-1000 yaw=500
+-- U: MC unmaps what it gave to the containers
+   SUPERVISOR: probe of BUS: MC can read 0 of the 272 pages it gave away
+   SUPERVISOR: probe of PAYLOAD: MC can read 0 of the 148 pages it gave away
+   SUPERVISOR: probe of PAYLOAD rings: MC can read 0 of 4 pages
+-- K1a: payload reads memory it does not map
+   PAYLOAD: K1 reading MC memory at 0x8000043590
+   PAYLOAD: K1 read begins, tsc 35716397000
+   WARN CPU 2: Page Fault in ring 3 at rip 0xb00012a8d7; the thread exits
+   SUPERVISOR: detected PAYLOAD heartbeat stalled for 513 ms, tsc 36233704000
+   SUPERVISOR: killed PAYLOAD: 2050 us, cpu 2 offline request: ok, tsc 36236602000
+   PAYLOAD: started, generation 2, 148 pages at 0xb000114000, tsc 36243196000
+   SUPERVISOR: started PAYLOAD on cpu 2: image 26704 bytes, 148 pages given, 0 kept by MC, 6997 us, tsc 36244000000
+   SUPERVISOR: PAYLOAD restart 1 done in 12691 us, tsc 36246847000
+-- K1b: payload writes memory it does not map
+   PAYLOAD: K1 writing MC's ring at 0xb000110000
+   PAYLOAD: K1 write begins, tsc 39729074000
+   WARN CPU 2: Page Fault in ring 3 at rip 0xb00012a91a; the thread exits
+   SUPERVISOR: detected PAYLOAD heartbeat stalled for 514 ms, tsc 40244457000
+   SUPERVISOR: killed PAYLOAD: 294 us, cpu 2 offline request: ok, tsc 40246558000
+   SUPERVISOR: started PAYLOAD on cpu 2: image 26704 bytes, 148 pages given, 0 kept by MC, 7586 us, tsc 40256382000
+   PAYLOAD: started, generation 3, 148 pages at 0xb000114000, tsc 40256447000
+   SUPERVISOR: PAYLOAD restart 2 done in 16110 us, tsc 40261747000
+-- K2: payload tries to reach around the bus
+   TO_TEST: PAYLOAD_REPORT K2 send on descriptors 0..31: -117 for each
+   TO_TEST: PAYLOAD_REPORT K2 send_pages on descriptor 0: -117
+   TO_TEST: PAYLOAD_REPORT K2 send_endpoint on descriptor 0: -117
+   TO_TEST: PAYLOAD_REPORT K2 new_container: -105
+   TO_TEST: PAYLOAD_REPORT K2 kill_container(0): -145  kill_process(0): -145
+-- K3: payload takes all the memory it can and spins
+   TO_TEST: PAYLOAD_REPORT K3 mapped 11 pages, then mmap_4k: -105 (quota: -113)
+   TO_TEST: PAYLOAD_REPORT K3 spun 300 ms
+-- B1: payload sends commands it may not send
+   BUS DENY sender=payload mid=0x1806 cc=6 reason=sender denials=2
+   BUS DENY sender=payload mid=0x18D1 cc=2 reason=command denials=3
+   TO_TEST: BUS_EVENT     sender=2 reason=2 mid=0x1806 cc=6 denials=2 tsc=25192841000
+   TO_TEST: BUS_EVENT     sender=2 reason=3 mid=0x18D1 cc=2 denials=3 tsc=25193607000
+-- B2: payload sends telemetry under SAMPLE_APP's ID
+   BUS DENY sender=payload mid=0x0883 cc=0 reason=sender denials=4
+   TO_TEST: BUS_EVENT     sender=2 reason=2 mid=0x0883 cc=0 denials=4 tsc=27695456000
+-- B3: pointing request out of range
+   BUS DENY sender=payload mid=0x18D1 cc=1 reason=range denials=1
+   ADCS_SIM: SET_POINTING roll=1000 pitch=2000 yaw=3000
+   ADCS_SIM: SET_POINTING roll=4000 pitch=5000 yaw=6000
+-- B4: malformed packets
+   BUS DENY sender=payload mid=0x0000 cc=0 reason=malformed denials=5
+   BUS DENY sender=payload mid=0x0000 cc=0 reason=malformed denials=6
+   BUS DENY sender=payload mid=0x0000 cc=0 reason=malformed denials=7
+   BUS DENY sender=payload mid=0x0000 cc=0 reason=malformed denials=8
+   TO_TEST: PAYLOAD_REPORT B4 sent four malformed records
+-- B5: flood
+   BUS DENY sender=payload reason=rate dropped=1
+   BUS DENY sender=payload reason=rate dropped=55206
+   BUS RESTART_REQUEST sender=payload reason=rate denied=8 dropped=960193 t=48684945us
+   SUPERVISOR: detected RESTART_REQUEST from the bus: process=2 reason=5 denials=8 dropped=960193, tsc 48725745000
+   SUPERVISOR: PAYLOAD restart 3 done in 15859 us, tsc 48742092000
+-- B6: payload rewrites a record after publishing it
+   BUS DENY sender=payload mid=0x18D1 cc=1 reason=range denials=9
+   BUS DENY sender=payload mid=0x18D1 cc=1 reason=range denials=10
+   BUS DENY sender=payload mid=0x18D1 cc=1 reason=range denials=11
+   BUS RESTART_REQUEST sender=payload reason=range denied=11 dropped=960193 t=52746109us
+   TO_TEST: ADCS_HK       cmd=18 err=0 roll=1000 pitch=-1000 yaw=500 accepted=18 max_abs=7000 tsc=55698850000
+-- E: after the attacks
+   CI_TEST: script done, the word of MC memory is 0x5ec4e7
+   TO_TEST: IMAGER_HK     cmd=0 err=0 counter=2 attacks=0 generation=5 tsc=55006636000
+
+Measurements (timestamp counter at 1000768776 Hz; emulation times unless run under KVM)
+power-on to both containers running: 1542 ms; to cFE OPERATIONAL: 1653 ms
+U: 436 page faults of probe threads for 436 probed pages
+K1a: attack to detection 517 ms, to the new payload's first line 526 ms, to restart done 530 ms; largest telemetry gap 1000 ms
+K1b: attack to detection 515 ms, to the new payload's first line 527 ms, to restart done 532 ms; largest telemetry gap 1000 ms
+K3: largest telemetry gap 1000 ms
+B5: flood start to restart done 1022 ms; 960193 records dropped; largest telemetry gap 1000 ms
+B6: 3 rewritten records were read with a forbidden angle and denied
+payload restarts: 4; kill_container 294 to 2050 us; load and start 2267 to 12138 us; whole restart 8241 to 16110 us
+largest gap between SAMPLE_APP housekeeping packets over all attacks: 1000 ms (period 1000 ms)
+bus, cycles per record: forward n=304 median=1000 p99=137000 max=324000 deny n=7 median=11000 p99=34000 max=34000
+bus, last counters: forwarded mc=9 payload=295 denied mc=0 payload=8 dropped mc=0 payload=960193 restarts=1
+
+13 of 13 scenarios pass

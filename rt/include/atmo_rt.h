@@ -117,6 +117,33 @@ void     art_queue_destroy(art_queue_t *q);
 void *art_pages_alloc(size_t pages);          /* zeroed; NULL if out of memory */
 void  art_pages_free(void *addr, size_t pages);
 
+/* ---- Kernel calls for a program that manages containers ----
+ * Results are the kernel's: zero or more on success, negative otherwise;
+ * art_sys_error_name() names a result. */
+int     art_sys_map(uintptr_t va, size_t pages);     /* zeroed pages at va; 0 or -1 */
+int64_t art_sys_unmap(uintptr_t va, size_t pages);
+/* Creates a child container whose process maps the caller's pages
+ * [va, va + pages * 4096) at the same addresses. Its first thread starts at
+ * entry with stack pointer sp on processor cpu, which must be off; it finds
+ * va in rdi and pages in rsi. With endpoint >= 0 that thread holds the
+ * caller's endpoint of that descriptor in its descriptor 0. */
+int64_t art_sys_new_container(uintptr_t va, size_t pages, size_t funding, size_t process_quota,
+                              size_t cpu, int64_t endpoint, uintptr_t entry, uintptr_t sp);
+/* Sends pages to the thread that receives pages on the endpoint; its process
+ * then maps them too. Blocks until that thread receives. */
+int64_t art_sys_send_pages(size_t endpoint, uintptr_t va, size_t pages);
+/* A second kernel thread of this process. It must not call the runtime,
+ * except art_sys_thread_exit(). */
+int64_t art_sys_new_thread(uintptr_t entry, uintptr_t sp);
+void    art_sys_thread_exit(void) __attribute__((noreturn));
+int64_t art_sys_cpu_online_child(size_t child, size_t cpu);
+int64_t art_sys_cpu_offline_request(size_t cpu);
+int64_t art_sys_cpu_offline_request_child(size_t child, size_t cpu);
+int64_t art_sys_kill_container(size_t child);
+void    art_sys_yield(void);
+void    art_sys_error_name(int64_t code, char *buf, size_t size);
+uint64_t art_sys_rdtsc(void);
+
 /* ---- In-memory file system ----
  * Paths are absolute. Calls return a negative ART_FS_E value on failure. */
 #define ART_FS_READ      1u

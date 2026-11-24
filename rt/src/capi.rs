@@ -102,3 +102,96 @@ pub extern "C" fn art_task_valid(handle: u32) -> bool {
 pub extern "C" fn art_poll() {
     task::poll()
 }
+
+// ---- Kernel calls for a program that manages containers ----
+
+use crate::sys;
+
+/// Maps `pages` zeroed pages at the address `va`. Returns 0, or -1 if the
+/// kernel refuses.
+#[no_mangle]
+pub extern "C" fn art_sys_map(va: usize, pages: usize) -> i32 {
+    if sys::map_pages(va, pages) {
+        0
+    } else {
+        -1
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn art_sys_unmap(va: usize, pages: usize) -> i64 {
+    sys::unmap_pages(va, pages) as i64
+}
+
+#[no_mangle]
+pub extern "C" fn art_sys_new_container(
+    va: usize,
+    pages: usize,
+    funding: usize,
+    process_quota: usize,
+    cpu: usize,
+    endpoint: i64,
+    entry: usize,
+    sp: usize,
+) -> i64 {
+    let endpoint = if endpoint < 0 { None } else { Some(endpoint as usize) };
+    sys::new_container(va, pages, funding, process_quota, cpu, endpoint, entry, sp) as i64
+}
+
+#[no_mangle]
+pub extern "C" fn art_sys_send_pages(endpoint: usize, va: usize, pages: usize) -> i64 {
+    sys::send_pages(endpoint, va, pages) as i64
+}
+
+#[no_mangle]
+pub extern "C" fn art_sys_new_thread(entry: usize, sp: usize) -> i64 {
+    sys::new_thread(entry, sp) as i64
+}
+
+#[no_mangle]
+pub extern "C" fn art_sys_thread_exit() -> ! {
+    sys::thread_exit()
+}
+
+#[no_mangle]
+pub extern "C" fn art_sys_cpu_online_child(child: usize, cpu: usize) -> i64 {
+    sys::cpu_online_child(child, cpu) as i64
+}
+
+#[no_mangle]
+pub extern "C" fn art_sys_cpu_offline_request(cpu: usize) -> i64 {
+    sys::cpu_offline_request(cpu) as i64
+}
+
+#[no_mangle]
+pub extern "C" fn art_sys_cpu_offline_request_child(child: usize, cpu: usize) -> i64 {
+    sys::cpu_offline_request_child(child, cpu) as i64
+}
+
+#[no_mangle]
+pub extern "C" fn art_sys_kill_container(child: usize) -> i64 {
+    sys::kill_container(child) as i64
+}
+
+#[no_mangle]
+pub extern "C" fn art_sys_yield() {
+    sys::yield_cpu()
+}
+
+/// Copies the name of a kernel result into `buf` as a C string.
+#[no_mangle]
+pub unsafe extern "C" fn art_sys_error_name(code: i64, buf: *mut u8, size: usize) {
+    if buf.is_null() || size == 0 {
+        return;
+    }
+    let name = sys::error_name(code as isize).as_bytes();
+    let n = name.len().min(size - 1);
+    core::ptr::copy_nonoverlapping(name.as_ptr(), buf, n);
+    buf.add(n).write(0);
+}
+
+/// Reads the timestamp counter.
+#[no_mangle]
+pub extern "C" fn art_sys_rdtsc() -> u64 {
+    sys::rdtsc()
+}

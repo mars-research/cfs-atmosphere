@@ -12,7 +12,9 @@ set -uo pipefail
 . "$(dirname "$0")/env.sh"
 log="$PORT_ROOT/out/cfs/run.log"
 
-"$PORT_ROOT/tools/run-qemu.sh" "$PORT_ROOT/out/cfs/cfs-cpu1.img" "${1:-120}" >"$log" 2>&1
+# The image also holds the attack demo, whose containers need processors of
+# their own; tools/test-attack-demo.sh checks that part of the run.
+ATMO_QEMU_SMP="${ATMO_QEMU_SMP:-4}" "$PORT_ROOT/tools/run-qemu.sh" "$PORT_ROOT/out/cfs/cfs-cpu1.img" "${1:-240}" >"$log" 2>&1
 status=$?
 
 failed=0

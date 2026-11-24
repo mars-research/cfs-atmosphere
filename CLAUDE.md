@@ -47,11 +47,14 @@ Run from the repository root, inside the shell.
     tools/get-submodules.sh
     tools/build-atmosphere.sh      # loader, kernel, runtime; about 30 s clean
     tools/build-cfs.sh             # out/cfs/cfs-cpu1.img
-    tools/test-cfs.sh              # boots cFS and checks the console; about 25 s
+    tools/test-cfs.sh              # boots cFS (4 processors) and checks the console; about 60 s
+    tools/test-attack-demo.sh      # the same boot, checked for the attack demo: 13 of 13
 
     tests/hello/build.sh   && tools/run-qemu.sh out/hello/hello.elf      # exits 42
     tests/rt/build.sh      && tools/run-qemu.sh out/rt/rt_test.elf       # 4191 checks
     tests/preempt/build.sh && tools/run-qemu.sh out/preempt/preempt_test.elf   # 20 checks
+    tests/container/build.sh && ATMO_QEMU_SMP=4 tools/run-qemu.sh out/container/container_test.img  # 19 checks
+    tests/demo/build.sh    && ATMO_QEMU_SMP=4 tools/run-qemu.sh out/demo/demo_test.img 180        # 38 checks
 
     cmake -S tests/osal -B out/osal-tests \
           -DCMAKE_TOOLCHAIN_FILE=$PWD/cmake/toolchain-x86_64-atmosphere.cmake \
@@ -91,6 +94,19 @@ CMake caches hold absolute paths.
   `-mgeneral-regs-only`, Rust for `x86_64-unknown-none`.
 - **The kernel's `dom0` self-test needs 4 processors.** It fails with
   `-smp 1` at `cpu_online`, by design.
+- **Child containers** (`demo/mc/demo_mc.c`, `rt/src/sys.rs`): a container
+  costs two 2M pages of quota, which stay with the thread when the call
+  fails; its processor must be off, and a processor comes back idle from
+  `kill_container`, so ask it off and retry. The kernel numbers child
+  containers in creation order, and the numbers shift after a kill.
+- **cFE limits that bit the demo:** a pipe is at most 50 deep, and a
+  subscription lets 4 packets of one ID wait in a pipe unless
+  `CFE_SB_SubscribeEx` raises that.
+- **Lines of different processors interleave in the log.** A check that
+  cuts the log into windows needs a marker that is printed before the event
+  it marks, not after.
+- **A faulting user thread prints one kernel line and the run goes on.** The
+  demo's probe of unmapped pages prints 420 of them at start, on purpose.
 
 ## Changing the kernel
 

@@ -1,0 +1,1213 @@
+Size of BSP reserved memory = 3411584 bytes
+CFE_PSP: Allocated 3411968 bytes for PSP reserved memory at: 0xA000000000
+CFE_PSP: PSP reserved memory ends at: 0xA000340E80
+CFE_PSP: 14 files from the boot payload (71680 bytes)
+CFE_PSP: initializing module 'soft_timebase' with ID 0110ff00
+CFE_PSP: Instantiated software timebase 'cFS-Master' running at 10000 usec
+CFE_PSP: initializing module 'eeprom_notimpl' with ID 0110ff01
+CFE_PSP: EEPROM access not implemented
+CFE_PSP: initializing module 'ram_notimpl' with ID 0110ff02
+CFE_PSP: Physical RAM access not implemented
+CFE_PSP: initializing module 'port_notimpl' with ID 0110ff03
+CFE_PSP: I/O Port access not implemented
+CFE_PSP: initializing module 'iodriver' with ID 0110ff04
+CFE_PSP: initializing module 'endian_api' with ID 0110ff05
+CFE_PSP: Host CPU Endian=LITTLE
+CFE_PSP: Clearing Processor Reserved Memory.
+1980-001-00:00:00.02249 CFE_ES_SetupResetVariables: POWER ON RESET due to Power Cycle (Power Cycle).
+1980-001-00:00:00.02393 CFE_ES_Main: CFE_ES_Main in EARLY_INIT state
+CFE_PSP: CFE_PSP_AttachExceptions called
+1980-001-00:00:00.02480 CFE_ES_Main: CFE_ES_Main entering CORE_STARTUP state
+1980-001-00:00:00.02498 CFE_ES_CreateObjects: Starting Object Creation calls.
+1980-001-00:00:00.02517 CFE_ES_CreateObjects: Calling EarlyInit for CFE_CONFIG
+1980-001-00:00:00.02606 CFE_ES_CreateObjects: Calling EarlyInit for CFE_ES
+1980-001-00:00:00.02709 CFE_ES_CreateObjects: Calling EarlyInit for CFE_EVS
+1980-001-00:00:00.02749 CFE_EVS_EarlyInit: Event Log cleared following power-on reset
+1980-001-00:00:00.02802 CFE_ES_CreateObjects: Calling EarlyInit for CFE_FS
+1980-001-00:00:00.02860 CFE_ES_CreateObjects: Calling EarlyInit for CFE_SB
+1980-001-00:00:00.02944 CFE_ES_CreateObjects: Calling EarlyInit for CFE_TBL
+1980-001-00:00:00.03058 CFE_ES_CreateObjects: Calling EarlyInit for CFE_TIME
+EVS Port1 1980-012-14:03:20.05249 66/1/CFE_ES 1: cFE ES Initialized: CFE_ES v7.0.2-rc1-oss (Draco) DEV BUILD, based on v7.0.1, EDS disabled
+EVS Port1 1980-012-14:03:20.05366 66/1/CFE_ES 2: cFS Versions: cfe v7.0.2-rc1-oss, osal v7.0.2-rc1-oss, psp v7.0.2-rc1-oss. cFE chksm 0
+EVS Port1 1980-012-14:03:20.05424 66/1/CFE_ES 91: Version Info: Mission AtmosphereMission, version git:v7.0.1-181-g1847c75
+EVS Port1 1980-012-14:03:20.05456 66/1/CFE_ES 91: Version Info: Module CORE_API, version git:v7.0.1-134-g3673163b
+EVS Port1 1980-012-14:03:20.05484 66/1/CFE_ES 91: Version Info: Module SAMPLE_LIB, version git:v7.0.1-11-gd0f8a2e
+EVS Port1 1980-012-14:03:20.05517 66/1/CFE_ES 91: Version Info: Module SAMPLE_APP, version git:v7.0.1-15-g71bc683
+EVS Port1 1980-012-14:03:20.05546 66/1/CFE_ES 91: Version Info: Module SCH_LAB, version git:v7.0.1-15-geb16c6c
+EVS Port1 1980-012-14:03:20.05580 66/1/CFE_ES 91: Version Info: Module HK, version git:v7.0.1-19-gb5b6db1
+EVS Port1 1980-012-14:03:20.05606 66/1/CFE_ES 91: Version Info: Module CI_TEST, version git:72c0b53-dirty
+EVS Port1 1980-012-14:03:20.05632 66/1/CFE_ES 91: Version Info: Module TO_TEST, version git:72c0b53-dirty
+EVS Port1 1980-012-14:03:20.05659 66/1/CFE_ES 91: Version Info: Module SUPERVISOR, version git:72c0b53-dirty
+EVS Port1 1980-012-14:03:20.05685 66/1/CFE_ES 91: Version Info: Module BUS_BRIDGE, version git:72c0b53-dirty
+EVS Port1 1980-012-14:03:20.05714 66/1/CFE_ES 91: Version Info: Module ADCS_SIM, version git:72c0b53-dirty
+EVS Port1 1980-012-14:03:20.05743 66/1/CFE_ES 91: Version Info: Module CONFIG, version git:v7.0.1-134-g3673163b
+EVS Port1 1980-012-14:03:20.05775 66/1/CFE_ES 91: Version Info: Module ES, version git:v7.0.1-134-g3673163b
+EVS Port1 1980-012-14:03:20.05815 66/1/CFE_ES 91: Version Info: Module EVS, version git:v7.0.1-134-g3673163b
+EVS Port1 1980-012-14:03:20.05841 66/1/CFE_ES 91: Version Info: Module FS, version git:v7.0.1-134-g3673163b
+EVS Port1 1980-012-14:03:20.05870 66/1/CFE_ES 91: Version Info: Module SB, version git:v7.0.1-134-g3673163b
+EVS Port1 1980-012-14:03:20.05915 66/1/CFE_ES 91: Version Info: Module TBL, version git:v7.0.1-134-g3673163b
+EVS Port1 1980-012-14:03:20.05950 66/1/CFE_ES 91: Version Info: Module TIME, version git:v7.0.1-134-g3673163b
+EVS Port1 1980-012-14:03:20.05984 66/1/CFE_ES 91: Version Info: Module OSAL, version git:v7.0.1-57-g2a96a4ff
+EVS Port1 1980-012-14:03:20.06019 66/1/CFE_ES 91: Version Info: Module PSP, version git:v7.0.1-45-g5c8a969
+EVS Port1 1980-012-14:03:20.06050 66/1/CFE_ES 91: Version Info: Module MSG, version git:v7.0.1-134-g3673163b
+EVS Port1 1980-012-14:03:20.06080 66/1/CFE_ES 91: Version Info: Module SBR, version git:v7.0.1-134-g3673163b
+EVS Port1 1980-012-14:03:20.06114 66/1/CFE_ES 91: Version Info: Module RESOURCEID, version git:v7.0.1-134-g3673163b
+EVS Port1 1980-012-14:03:20.06150 66/1/CFE_ES 92: Build 202611231337 by user@host, config atmo
+EVS Port1 1980-012-14:03:20.15132 66/1/CFE_EVS 1: cFE EVS Initialized: CFE_EVS v7.0.2-rc1-oss (Draco) DEV BUILD, based on v7.0.1, EDS disabled
+1980-012-14:03:20.25137 CFE_SB_AppInit: Registered 4 events for filtering
+EVS Port1 1980-012-14:03:20.25209 66/1/CFE_SB 1: cFE SB Initialized: CFE_SB v7.0.2-rc1-oss (Draco) DEV BUILD, based on v7.0.1, EDS disabled
+EVS Port1 1980-012-14:03:20.25288 66/1/CFE_SB 14: No subscribers for MsgId 0x808,sender CFE_SB
+EVS Port1 1980-012-14:03:20.35182 66/1/CFE_TBL 1: cFE TBL Initialized: CFE_TBL v7.0.2-rc1-oss (Draco) DEV BUILD, based on v7.0.1, EDS disabled
+EVS Port1 1980-012-14:03:20.35246 66/1/CFE_SB 14: No subscribers for MsgId 0x808,sender CFE_TBL
+EVS Port1 1980-012-14:03:20.45243 66/1/CFE_TIME 1: cFE TIME Initialized: CFE_TIME v7.0.2-rc1-oss (Draco) DEV BUILD, based on v7.0.1, EDS disabled
+EVS Port1 1980-012-14:03:20.45292 66/1/CFE_SB 14: No subscribers for MsgId 0x808,sender CFE_TIME
+1980-012-14:03:20.50176 CFE_ES_CreateObjects: Finished ES CreateObject table entries.
+1980-012-14:03:20.50213 CFE_ES_Main: CFE_ES_Main entering CORE_READY state
+1980-012-14:03:20.50303 CFE_ES_OpenStartupScript: Opened ES App Startup file: /cf/cfe_es_startup.scr
+1980-012-14:03:20.50376 CFE_ES_ParseFileEntry: Loading shared library: /cf/sample_lib.so
+SAMPLE Lib Initialized.Sample Lib v7.0.2-rc1-oss (Draco) DEV BUILD, based on v7.0.1, EDS disabled
+1980-012-14:03:20.50487 CFE_ES_ParseFileEntry: Loading file: /cf/sch_lab.so, APP: SCH_LAB
+1980-012-14:03:20.50587 CFE_ES_ParseFileEntry: Loading file: /cf/sample_app.so, APP: SAMPLE_APP
+1980-012-14:03:20.50640 CFE_ES_ParseFileEntry: Loading file: /cf/hk.so, APP: HK
+1980-012-14:03:20.50691 CFE_ES_ParseFileEntry: Loading file: /cf/to_test.so, APP: TO_TEST
+1980-012-14:03:20.50725 CFE_ES_ParseFileEntry: Loading file: /cf/supervisor.so, APP: SUPERVISOR
+1980-012-14:03:20.50762 CFE_ES_ParseFileEntry: Loading file: /cf/bus_bridge.so, APP: BUS_BRIDGE
+1980-012-14:03:20.50796 CFE_ES_ParseFileEntry: Loading file: /cf/adcs_sim.so, APP: ADCS_SIM
+1980-012-14:03:20.50833 CFE_ES_ParseFileEntry: Loading file: /cf/ci_test.so, APP: CI_TEST
+SCH Lab Initialized.SCH Lab v7.0.2-rc1-oss (Draco) DEV BUILD, based on v7.0.1, EDS disabled
+SUPERVISOR: started, tsc 1494951000, counter 1001868852 Hz
+BUS started, 5 allow rows, 4 routes, quota: Success
+SUPERVISOR: started BUS on cpu 1: image 32768 bytes, 272 pages given, 4 kept by MC, 5321 us, tsc 1500737000
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+SUPERVISOR: probe of BUS: MC can read 0 of the 272 pages it gave away
+BUS_BRIDGE: started
+PAYLOAD: started, generation 1, 148 pages at 0xb000114000, tsc 1584637000
+EVS Port1 1980-012-14:03:20.65512 66/1/SAMPLE_APP 1: Sample App Initialized.Sample App v7.0.2-rc1-oss (Draco) DEV BUILD, based on v7.0.1, EDS disabled
+EVS Port1 1980-012-14:03:20.65577 66/1/CFE_SB 14: No subscribers for MsgId 0x808,sender SAMPLE_APP
+SUPERVISOR: started PAYLOAD on cpu 2: image 26704 bytes, 148 pages given, 0 kept by MC, 5469 us, tsc 1589091000
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+BUS payload generation 1
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+SUPERVISOR: probe of PAYLOAD: MC can read 0 of the 148 pages it gave away
+ADCS_SIM: started
+EVS Port1 1980-012-14:03:20.71694 66/1/HK 1: HK Initialized.  Version 7.0.2.255
+TO_TEST: started, 12 packets subscribed
+1980-012-14:03:20.76574 CFE_ES_Main: CFE_ES_Main entering APPS_INIT state
+1980-012-14:03:20.76677 CFE_ES_Main: CFE_ES_Main entering OPERATIONAL state
+CI_TEST: started, 16 commands in the script, cFE is OPERATIONAL, tsc=1699981000
+CI_TEST: a word of MC memory is at 0x8000043590, value 0x5ec4e7
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=0 attacks=0 generation=1 tsc=1793897000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=1 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=2508111000
+TO_TEST: ADCS_HK       cmd=0 err=0 roll=0 pitch=0 yaw=0 accepted=0 max_abs=0 tsc=2739579000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1 attacks=0 generation=1 tsc=2788497000
+EVS Port1 1980-012-14:03:21.00051 66/1/CFE_TIME 21: Stop FLYWHEEL
+ADCS_SIM: SET_POINTING roll=1000 pitch=-1000 yaw=500
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=0 err=0 tsc=3393331000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=3 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=3511275000
+TO_TEST: ADCS_HK       cmd=1 err=0 roll=1000 pitch=-1000 yaw=500 accepted=1 max_abs=1000 tsc=3691531000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=2 attacks=0 generation=1 tsc=3791515000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=0 err=0 tsc=4395081000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=4 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=4513991000
+TO_TEST: ADCS_HK       cmd=1 err=0 roll=1000 pitch=-1000 yaw=500 accepted=1 max_abs=1000 tsc=4683624000
+EVS Port1 1980-012-14:03:22.82096 66/1/SAMPLE_APP 3: SAMPLE: NOOP command v7.0.2-rc1-oss
+CI_TEST: sent SAMPLE_APP no-op (mid=0x1882 cc=0) status=0x00000000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=3 attacks=0 generation=1 tsc=4794078000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=5396897000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=5 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=5517044000
+TO_TEST: ADCS_HK       cmd=1 err=0 roll=1000 pitch=-1000 yaw=500 accepted=1 max_abs=1000 tsc=5675775000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=4 attacks=0 generation=1 tsc=5797328000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=6399127000
+TO_TEST: CFE_ES_HK     mid=0x0800 len=184 cmd=0 err=0 tsc=6399932000
+BUS STATS forwarded mc=0 payload=6 denied mc=0 payload=0 dropped mc=0 payload=0 restarts=0
+BUS CYCLES forward n=6 median=4000 p99=188000 max=188000 deny n=0 median=0 p99=0 max=0
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=6 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=6511128000
+TO_TEST: CFE_EVS_HK    mid=0x0801 len=288 cmd=0 err=0 tsc=6599291000
+TO_TEST: ADCS_HK       cmd=1 err=0 roll=1000 pitch=-1000 yaw=500 accepted=1 max_abs=1000 tsc=6667781000
+EVS Port1 1980-012-14:03:24.82221 66/1/CFE_ES 92: Build 202611231337 by user@host, config atmo
+EVS Port1 1980-012-14:03:24.82293 66/1/CFE_ES 3: No-op command:
+ cFS Versions: cfe v7.0.2-rc1-oss, osal v7.0.2-rc1-oss, psp v7.0.2-rc1-oss
+CI_TEST: sent CFE_ES no-op (mid=0x1806 cc=0) status=0x00000000
+TO_TEST: CFE_TIME_HK   mid=0x0805 len=48 cmd=0 err=0 tsc=6799669000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=5 attacks=0 generation=1 tsc=6800443000
+TO_TEST: CFE_SB_HK     mid=0x0803 len=44 cmd=0 err=0 tsc=6999987000
+TO_TEST: CFE_TBL_HK    mid=0x0804 len=300 cmd=0 err=0 tsc=7200551000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=7400724000
+TO_TEST: HK_HK         mid=0x089B len=28 cmd=0 err=0 tsc=7401227000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=7 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=7513895000
+TO_TEST: ADCS_HK       cmd=1 err=0 roll=1000 pitch=-1000 yaw=500 accepted=1 max_abs=1000 tsc=7659770000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=6 attacks=0 generation=1 tsc=7802761000
+ADCS_SIM: SET_POINTING roll=2000 pitch=-2000 yaw=1000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=8402486000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=9 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=8516345000
+TO_TEST: ADCS_HK       cmd=2 err=0 roll=2000 pitch=-2000 yaw=1000 accepted=2 max_abs=2000 tsc=8696502000
+EVS Port1 1980-012-14:03:26.82438 66/1/SAMPLE_APP 3: SAMPLE: NOOP command v7.0.2-rc1-oss
+CI_TEST: sent SAMPLE_APP no-op (mid=0x1882 cc=0) status=0x00000000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=7 attacks=0 generation=1 tsc=8805671000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=2 err=0 tsc=9404344000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=10 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=9518985000
+TO_TEST: ADCS_HK       cmd=2 err=0 roll=2000 pitch=-2000 yaw=1000 accepted=2 max_abs=2000 tsc=9688625000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=8 attacks=0 generation=1 tsc=9808042000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=2 err=0 tsc=10406270000
+TO_TEST: CFE_ES_HK     mid=0x0800 len=184 cmd=1 err=0 tsc=10406800000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=11 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=10521381000
+TO_TEST: ADCS_HK       cmd=2 err=0 roll=2000 pitch=-2000 yaw=1000 accepted=2 max_abs=2000 tsc=10680649000
+EVS Port1 1980-012-14:03:28.82556 66/1/SAMPLE_APP 2: Invalid ground command code: CC = 99
+CI_TEST: sent SAMPLE_APP invalid function code (mid=0x1882 cc=99) status=0x00000000
+TO_TEST: CFE_EVS_HK    mid=0x0801 len=288 cmd=0 err=0 tsc=10807035000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=9 attacks=0 generation=1 tsc=10810317000
+TO_TEST: CFE_TIME_HK   mid=0x0805 len=48 cmd=0 err=0 tsc=11207733000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=2 err=0 tsc=11408111000
+BUS STATS forwarded mc=0 payload=12 denied mc=0 payload=0 dropped mc=0 payload=0 restarts=0
+BUS CYCLES forward n=12 median=3000 p99=188000 max=188000 deny n=0 median=0 p99=0 max=0
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=12 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=11523729000
+TO_TEST: CFE_SB_HK     mid=0x0803 len=44 cmd=0 err=0 tsc=11608529000
+TO_TEST: ADCS_HK       cmd=2 err=0 roll=2000 pitch=-2000 yaw=1000 accepted=2 max_abs=2000 tsc=11672691000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=10 attacks=0 generation=1 tsc=11812646000
+TO_TEST: CFE_TBL_HK    mid=0x0804 len=300 cmd=0 err=0 tsc=12009293000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=2 err=0 tsc=12409988000
+TO_TEST: HK_HK         mid=0x089B len=28 cmd=0 err=0 tsc=12410487000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=13 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=12525938000
+1980-012-14:03:30.82727 CFE_ES_RestartApp: Restart Application SAMPLE_APP Initiated
+CI_TEST: sent CFE_ES restart SAMPLE_APP (mid=0x1806 cc=6) status=0x00000000
+TO_TEST: ADCS_HK       cmd=2 err=0 roll=2000 pitch=-2000 yaw=1000 accepted=2 max_abs=2000 tsc=12763864000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=11 attacks=0 generation=1 tsc=12814947000
+ADCS_SIM: SET_POINTING roll=3000 pitch=-3000 yaw=1500
+1980-012-14:03:31.51010 CFE_ES_ExitApp: Application SAMPLE_APP called CFE_ES_ExitApp
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=2 err=0 tsc=13412587000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=15 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=13528358000
+TO_TEST: ADCS_HK       cmd=3 err=0 roll=3000 pitch=-3000 yaw=1500 accepted=3 max_abs=3000 tsc=13708698000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=12 attacks=0 generation=1 tsc=13809092000
+TO_TEST: CFE_ES_HK     mid=0x0800 len=184 cmd=2 err=0 tsc=14413743000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=16 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=14531837000
+TO_TEST: ADCS_HK       cmd=3 err=0 roll=3000 pitch=-3000 yaw=1500 accepted=3 max_abs=3000 tsc=14700759000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=13 attacks=0 generation=1 tsc=14812189000
+TO_TEST: CFE_EVS_HK    mid=0x0801 len=288 cmd=0 err=0 tsc=15014834000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=17 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=15534563000
+TO_TEST: CFE_TIME_HK   mid=0x0805 len=48 cmd=0 err=0 tsc=15615965000
+TO_TEST: ADCS_HK       cmd=3 err=0 roll=3000 pitch=-3000 yaw=1500 accepted=3 max_abs=3000 tsc=15692788000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=14 attacks=0 generation=1 tsc=15814411000
+TO_TEST: CFE_SB_HK     mid=0x0803 len=44 cmd=0 err=0 tsc=16217158000
+BUS STATS forwarded mc=0 payload=18 denied mc=0 payload=0 dropped mc=0 payload=0 restarts=0
+BUS CYCLES forward n=18 median=3000 p99=188000 max=188000 deny n=0 median=0 p99=0 max=0
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=18 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=16537350000
+TO_TEST: ADCS_HK       cmd=3 err=0 roll=3000 pitch=-3000 yaw=1500 accepted=3 max_abs=3000 tsc=16684836000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=15 attacks=0 generation=1 tsc=16817735000
+TO_TEST: CFE_TBL_HK    mid=0x0804 len=300 cmd=0 err=0 tsc=16818931000
+TO_TEST: HK_HK         mid=0x089B len=28 cmd=0 err=0 tsc=17419452000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=19 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=17531986000
+TO_TEST: ADCS_HK       cmd=3 err=0 roll=3000 pitch=-3000 yaw=1500 accepted=3 max_abs=3000 tsc=17776049000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=16 attacks=0 generation=1 tsc=17821114000
+ADCS_SIM: SET_POINTING roll=4000 pitch=-4000 yaw=2000
+TO_TEST: CFE_ES_HK     mid=0x0800 len=184 cmd=2 err=0 tsc=18421614000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=21 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=18536107000
+TO_TEST: ADCS_HK       cmd=4 err=0 roll=4000 pitch=-4000 yaw=2000 accepted=4 max_abs=4000 tsc=18715690000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=17 attacks=0 generation=1 tsc=18825515000
+EVS Port1 1980-012-14:03:37.01283 66/1/CFE_ES 10: Restart Application SAMPLE_APP Success, AppID=0x11000e.
+EVS Port1 1980-012-14:03:37.06431 66/1/SAMPLE_APP 1: Sample App Initialized.Sample App v7.0.2-rc1-oss (Draco) DEV BUILD, based on v7.0.1, EDS disabled
+TO_TEST: CFE_EVS_HK    mid=0x0801 len=288 cmd=0 err=0 tsc=19222765000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=0 err=0 tsc=19423066000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=22 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=19541327000
+TO_TEST: ADCS_HK       cmd=4 err=0 roll=4000 pitch=-4000 yaw=2000 accepted=4 max_abs=4000 tsc=19707912000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=18 attacks=0 generation=1 tsc=19821563000
+TO_TEST: CFE_TIME_HK   mid=0x0805 len=48 cmd=0 err=0 tsc=20024177000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=0 err=0 tsc=20424937000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=23 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=20544012000
+TO_TEST: ADCS_HK       cmd=4 err=0 roll=4000 pitch=-4000 yaw=2000 accepted=4 max_abs=4000 tsc=20699938000
+EVS Port1 1980-012-14:03:38.82862 66/1/SAMPLE_APP 3: SAMPLE: NOOP command v7.0.2-rc1-oss
+CI_TEST: sent SAMPLE_APP no-op (mid=0x1882 cc=0) status=0x00000000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=19 attacks=0 generation=1 tsc=20824048000
+TO_TEST: CFE_SB_HK     mid=0x0803 len=44 cmd=0 err=0 tsc=20825843000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=21426790000
+BUS STATS forwarded mc=0 payload=24 denied mc=0 payload=0 dropped mc=0 payload=0 restarts=0
+BUS CYCLES forward n=24 median=3000 p99=188000 max=188000 deny n=0 median=0 p99=0 max=0
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=24 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=21546373000
+TO_TEST: CFE_TBL_HK    mid=0x0804 len=300 cmd=0 err=0 tsc=21627204000
+TO_TEST: ADCS_HK       cmd=4 err=0 roll=4000 pitch=-4000 yaw=2000 accepted=4 max_abs=4000 tsc=21691923000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=20 attacks=0 generation=1 tsc=21826477000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=22428732000
+TO_TEST: CFE_ES_HK     mid=0x0800 len=184 cmd=2 err=0 tsc=22429238000
+TO_TEST: HK_HK         mid=0x089B len=28 cmd=0 err=0 tsc=22429671000
+TO_TEST: BUS_HK        fwd_mc=0 fwd_payload=25 denied_payload=0 dropped_payload=0 restart_requests=0 tsc=22549488000
+CI_TEST: sending ATTACK B3 pointing out of range (attack=7) tsc=22749036000
+PAYLOAD: ATTACK 7 begins, tsc 22750222000
+PAYLOAD: B3 sent pointing 1000,2000,3000 then 90000,0,0 then 4000,5000,6000
+BUS DENY sender=payload mid=0x18D1 cc=1 reason=range denials=1
+ADCS_SIM: SET_POINTING roll=1000 pitch=2000 yaw=3000
+ADCS_SIM: SET_POINTING roll=4000 pitch=5000 yaw=6000
+TO_TEST: BUS_EVENT     sender=2 reason=4 mid=0x18D1 cc=1 denials=1 tsc=22759714000
+TO_TEST: PAYLOAD_REPORT B3 sent pointing 1000,2000,3000 then 90000,0,0 then 4000,5000,6000
+TO_TEST: ADCS_HK       cmd=5 err=0 roll=1000 pitch=2000 yaw=3000 accepted=5 max_abs=4000 tsc=22760691000
+TO_TEST: IMAGER_HK     cmd=1 err=0 counter=21 attacks=1 generation=1 tsc=22831185000
+ADCS_SIM: SET_POINTING roll=5000 pitch=-5000 yaw=2500
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=23430554000
+TO_TEST: CFE_EVS_HK    mid=0x0801 len=288 cmd=0 err=0 tsc=23431128000
+TO_TEST: BUS_HK        fwd_mc=1 fwd_payload=30 denied_payload=1 dropped_payload=0 restart_requests=0 tsc=23544944000
+TO_TEST: ADCS_HK       cmd=7 err=0 roll=5000 pitch=-5000 yaw=2500 accepted=7 max_abs=6000 tsc=23725000000
+TO_TEST: IMAGER_HK     cmd=1 err=0 counter=22 attacks=1 generation=1 tsc=23834158000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=24432434000
+TO_TEST: CFE_TIME_HK   mid=0x0805 len=48 cmd=0 err=0 tsc=24433071000
+TO_TEST: BUS_HK        fwd_mc=1 fwd_payload=31 denied_payload=1 dropped_payload=0 restart_requests=0 tsc=24547599000
+TO_TEST: ADCS_HK       cmd=7 err=0 roll=5000 pitch=-5000 yaw=2500 accepted=7 max_abs=6000 tsc=24717046000
+TO_TEST: IMAGER_HK     cmd=1 err=0 counter=23 attacks=1 generation=1 tsc=24836990000
+CI_TEST: sending ATTACK B1 forbidden commands (attack=5) tsc=25254474000
+PAYLOAD: ATTACK 5 begins, tsc 25255256000
+BUS DENY sender=payload mid=0x1806 cc=6 reason=sender denials=2
+PAYLOAD: B1 sent ES restart-app for SAMPLE_APP and ADCS reset
+BUS DENY sender=payload mid=0x18D1 cc=2 reason=command denials=3
+TO_TEST: BUS_EVENT     sender=2 reason=2 mid=0x1806 cc=6 denials=2 tsc=25264239000
+TO_TEST: BUS_EVENT     sender=2 reason=3 mid=0x18D1 cc=2 denials=3 tsc=25264851000
+TO_TEST: PAYLOAD_REPORT B1 sent ES restart-app for SAMPLE_APP and ADCS reset
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=25434303000
+TO_TEST: CFE_SB_HK     mid=0x0803 len=44 cmd=0 err=0 tsc=25434817000
+TO_TEST: BUS_HK        fwd_mc=2 fwd_payload=33 denied_payload=3 dropped_payload=0 restart_requests=0 tsc=25553496000
+TO_TEST: ADCS_HK       cmd=7 err=0 roll=5000 pitch=-5000 yaw=2500 accepted=7 max_abs=6000 tsc=25709048000
+TO_TEST: IMAGER_HK     cmd=2 err=0 counter=24 attacks=2 generation=1 tsc=25833395000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=26436277000
+TO_TEST: CFE_ES_HK     mid=0x0800 len=184 cmd=2 err=0 tsc=26436759000
+TO_TEST: CFE_TBL_HK    mid=0x0804 len=300 cmd=0 err=0 tsc=26437198000
+BUS STATS forwarded mc=2 payload=34 denied mc=0 payload=3 dropped mc=0 payload=0 restarts=0
+BUS CYCLES forward n=36 median=3000 p99=188000 max=188000 deny n=3 median=12000 p99=62000 max=62000
+TO_TEST: BUS_HK        fwd_mc=2 fwd_payload=34 denied_payload=3 dropped_payload=0 restart_requests=0 tsc=26555954000
+TO_TEST: ADCS_HK       cmd=7 err=0 roll=5000 pitch=-5000 yaw=2500 accepted=7 max_abs=6000 tsc=26701066000
+TO_TEST: IMAGER_HK     cmd=2 err=0 counter=25 attacks=2 generation=1 tsc=26835785000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=27438018000
+TO_TEST: HK_HK         mid=0x089B len=28 cmd=0 err=0 tsc=27438514000
+TO_TEST: BUS_HK        fwd_mc=2 fwd_payload=35 denied_payload=3 dropped_payload=0 restart_requests=0 tsc=27558124000
+TO_TEST: CFE_EVS_HK    mid=0x0801 len=288 cmd=0 err=0 tsc=27638368000
+CI_TEST: sending ATTACK B2 spoofed sender (attack=6) tsc=27759827000
+PAYLOAD: ATTACK 6 begins, tsc 27760591000
+PAYLOAD: B2 sent telemetry as SAMPLE_APP_HK
+BUS DENY sender=payload mid=0x0883 cc=0 reason=sender denials=4
+TO_TEST: BUS_EVENT     sender=2 reason=2 mid=0x0883 cc=0 denials=4 tsc=27769541000
+TO_TEST: PAYLOAD_REPORT B2 sent telemetry as SAMPLE_APP_HK
+TO_TEST: ADCS_HK       cmd=7 err=0 roll=5000 pitch=-5000 yaw=2500 accepted=7 max_abs=6000 tsc=27792265000
+TO_TEST: IMAGER_HK     cmd=3 err=0 counter=26 attacks=3 generation=1 tsc=27841820000
+ADCS_SIM: SET_POINTING roll=6000 pitch=-6000 yaw=3000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=28439872000
+TO_TEST: BUS_HK        fwd_mc=3 fwd_payload=38 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=28555207000
+TO_TEST: ADCS_HK       cmd=8 err=0 roll=6000 pitch=-6000 yaw=3000 accepted=8 max_abs=6000 tsc=28735485000
+TO_TEST: CFE_TIME_HK   mid=0x0805 len=48 cmd=0 err=0 tsc=28840623000
+TO_TEST: IMAGER_HK     cmd=3 err=0 counter=27 attacks=3 generation=1 tsc=28844670000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=29441734000
+TO_TEST: BUS_HK        fwd_mc=3 fwd_payload=39 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=29558096000
+TO_TEST: ADCS_HK       cmd=8 err=0 roll=6000 pitch=-6000 yaw=3000 accepted=8 max_abs=6000 tsc=29727616000
+TO_TEST: IMAGER_HK     cmd=3 err=0 counter=28 attacks=3 generation=1 tsc=29838467000
+TO_TEST: CFE_SB_HK     mid=0x0803 len=44 cmd=0 err=0 tsc=30042862000
+CI_TEST: sending ATTACK K2 around the bus (attack=3) tsc=30265152000
+PAYLOAD: ATTACK 3 begins, tsc 30266009000
+PAYLOAD: K2 send on descriptors 0..31: -117 for each
+PAYLOAD: K2 send_pages on descriptor 0: -117
+PAYLOAD: K2 send_endpoint on descriptor 0: -117
+PAYLOAD: K2 new_container: -105
+PAYLOAD: K2 kill_container(0): -145  kill_process(0): -145
+TO_TEST: PAYLOAD_REPORT K2 send on descriptors 0..31: -117 for each
+TO_TEST: PAYLOAD_REPORT K2 send_pages on descriptor 0: -117
+TO_TEST: PAYLOAD_REPORT K2 send_endpoint on descriptor 0: -117
+TO_TEST: PAYLOAD_REPORT K2 new_container: -105
+TO_TEST: PAYLOAD_REPORT K2 kill_container(0): -145  kill_process(0): -145
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=30443663000
+TO_TEST: CFE_ES_HK     mid=0x0800 len=184 cmd=2 err=0 tsc=30444181000
+TO_TEST: BUS_HK        fwd_mc=4 fwd_payload=45 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=30563899000
+TO_TEST: ADCS_HK       cmd=8 err=0 roll=6000 pitch=-6000 yaw=3000 accepted=8 max_abs=6000 tsc=30719654000
+TO_TEST: IMAGER_HK     cmd=4 err=0 counter=29 attacks=4 generation=1 tsc=30843891000
+TO_TEST: CFE_TBL_HK    mid=0x0804 len=300 cmd=0 err=0 tsc=31245114000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=31445486000
+BUS STATS forwarded mc=4 payload=46 denied mc=0 payload=4 dropped mc=0 payload=0 restarts=0
+BUS CYCLES forward n=50 median=3000 p99=188000 max=188000 deny n=4 median=12000 p99=62000 max=62000
+TO_TEST: BUS_HK        fwd_mc=4 fwd_payload=46 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=31566615000
+TO_TEST: ADCS_HK       cmd=8 err=0 roll=6000 pitch=-6000 yaw=3000 accepted=8 max_abs=6000 tsc=31711660000
+TO_TEST: CFE_EVS_HK    mid=0x0801 len=288 cmd=0 err=0 tsc=31846240000
+TO_TEST: IMAGER_HK     cmd=4 err=0 counter=30 attacks=4 generation=1 tsc=31846836000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=32447378000
+TO_TEST: HK_HK         mid=0x089B len=28 cmd=0 err=0 tsc=32447889000
+TO_TEST: BUS_HK        fwd_mc=4 fwd_payload=47 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=32560936000
+CI_TEST: sending ATTACK K3 exhaust memory (attack=4) tsc=32770449000
+PAYLOAD: ATTACK 4 begins, tsc 32771619000
+PAYLOAD: K3 mapped 11 pages, then mmap_4k: -105 (quota: -113)
+TO_TEST: PAYLOAD_REPORT K3 mapped 11 pages, then mmap_4k: -105 (quota: -113)
+TO_TEST: ADCS_HK       cmd=8 err=0 roll=6000 pitch=-6000 yaw=3000 accepted=8 max_abs=6000 tsc=32803010000
+PAYLOAD: K3 spun 300 ms
+TO_TEST: PAYLOAD_REPORT K3 spun 300 ms
+TO_TEST: IMAGER_HK     cmd=5 err=0 counter=31 attacks=5 generation=1 tsc=33078719000
+ADCS_SIM: SET_POINTING roll=7000 pitch=-7000 yaw=3500
+TO_TEST: CFE_TIME_HK   mid=0x0805 len=48 cmd=0 err=0 tsc=33248869000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=33449215000
+TO_TEST: BUS_HK        fwd_mc=5 fwd_payload=51 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=33566381000
+TO_TEST: ADCS_HK       cmd=9 err=0 roll=7000 pitch=-7000 yaw=3500 accepted=9 max_abs=7000 tsc=33746393000
+TO_TEST: IMAGER_HK     cmd=5 err=0 counter=32 attacks=5 generation=1 tsc=33846572000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=34451135000
+TO_TEST: CFE_ES_HK     mid=0x0800 len=184 cmd=2 err=0 tsc=34451709000
+TO_TEST: BUS_HK        fwd_mc=5 fwd_payload=52 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=34569875000
+TO_TEST: CFE_SB_HK     mid=0x0803 len=44 cmd=0 err=0 tsc=34651457000
+TO_TEST: ADCS_HK       cmd=9 err=0 roll=7000 pitch=-7000 yaw=3500 accepted=9 max_abs=7000 tsc=34738527000
+TO_TEST: IMAGER_HK     cmd=5 err=0 counter=33 attacks=5 generation=1 tsc=34850040000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=35453060000
+TO_TEST: BUS_HK        fwd_mc=5 fwd_payload=53 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=35572943000
+TO_TEST: ADCS_HK       cmd=9 err=0 roll=7000 pitch=-7000 yaw=3500 accepted=9 max_abs=7000 tsc=35730675000
+CI_TEST: sending ATTACK K1 read MC memory (attack=1) tsc=35776624000
+PAYLOAD: ATTACK 1 begins, tsc 35777649000
+PAYLOAD: K1 reading MC memory at 0x8000043590
+TO_TEST: PAYLOAD_REPORT K1 reading MC memory at 0x8000043590
+PAYLOAD: K1 read begins, tsc 35798601000
+ WARN CPU 2: Page Fault in ring 3 at rip 0xb00012a8d7; the thread exits
+TO_TEST: CFE_EVS_HK    mid=0x0801 len=288 cmd=0 err=0 tsc=36054120000
+TO_TEST: CFE_TBL_HK    mid=0x0804 len=300 cmd=0 err=0 tsc=36054521000
+SUPERVISOR: detected PAYLOAD heartbeat stalled for 514 ms, tsc 36326875000
+SUPERVISOR: restarting PAYLOAD: its heartbeat stalled, tsc 36327253000
+SUPERVISOR: killed PAYLOAD: 2767 us, cpu 2 offline request: ok, tsc 36330346000
+PAYLOAD: started, generation 2, 148 pages at 0xb000114000, tsc 36337102000
+SUPERVISOR: started PAYLOAD on cpu 2: image 26704 bytes, 148 pages given, 0 kept by MC, 6988 us, tsc 36337846000
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+SUPERVISOR: probe of PAYLOAD rings: MC can read 0 of 4 pages
+SUPERVISOR: PAYLOAD restart 1 done in 12317 us, tsc 36339592000
+BUS payload generation 2
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=36454831000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=0 attacks=0 generation=2 tsc=36539307000
+BUS STATS forwarded mc=6 payload=55 denied mc=0 payload=4 dropped mc=0 payload=0 restarts=0
+BUS CYCLES forward n=61 median=3000 p99=188000 max=188000 deny n=4 median=12000 p99=62000 max=62000
+TO_TEST: BUS_HK        fwd_mc=6 fwd_payload=55 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=36575937000
+TO_TEST: ADCS_HK       cmd=9 err=0 roll=7000 pitch=-7000 yaw=3500 accepted=9 max_abs=7000 tsc=36722724000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=37456716000
+TO_TEST: HK_HK         mid=0x089B len=28 cmd=0 err=0 tsc=37457223000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1 attacks=0 generation=2 tsc=37542259000
+TO_TEST: BUS_HK        fwd_mc=6 fwd_payload=56 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=37578403000
+TO_TEST: CFE_TIME_HK   mid=0x0805 len=48 cmd=0 err=0 tsc=37657064000
+TO_TEST: ADCS_HK       cmd=9 err=0 roll=7000 pitch=-7000 yaw=3500 accepted=9 max_abs=7000 tsc=37714772000
+ADCS_SIM: SET_POINTING roll=1000 pitch=-1000 yaw=500
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=38458672000
+TO_TEST: CFE_ES_HK     mid=0x0800 len=184 cmd=2 err=0 tsc=38459132000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=2 attacks=0 generation=2 tsc=38545586000
+TO_TEST: BUS_HK        fwd_mc=6 fwd_payload=58 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=38572728000
+TO_TEST: ADCS_HK       cmd=10 err=0 roll=1000 pitch=-1000 yaw=500 accepted=10 max_abs=7000 tsc=38742920000
+TO_TEST: CFE_SB_HK     mid=0x0803 len=44 cmd=0 err=0 tsc=39260059000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=39460431000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=3 attacks=0 generation=2 tsc=39548773000
+TO_TEST: BUS_HK        fwd_mc=6 fwd_payload=59 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=39575928000
+TO_TEST: ADCS_HK       cmd=10 err=0 roll=1000 pitch=-1000 yaw=500 accepted=10 max_abs=7000 tsc=39734991000
+CI_TEST: sending ATTACK K1 write MC ring (attack=2) tsc=39784678000
+PAYLOAD: ATTACK 2 begins, tsc 39786089000
+PAYLOAD: K1 writing MC's ring at 0xb000110000
+TO_TEST: PAYLOAD_REPORT K1 writing MC's ring at 0xb000110000
+PAYLOAD: K1 write begins, tsc 39807507000
+ WARN CPU 2: Page Fault in ring 3 at rip 0xb00012a91a; the thread exits
+TO_TEST: CFE_EVS_HK    mid=0x0801 len=288 cmd=0 err=0 tsc=40261920000
+SUPERVISOR: detected PAYLOAD heartbeat stalled for 513 ms, tsc 40322210000
+SUPERVISOR: restarting PAYLOAD: its heartbeat stalled, tsc 40322596000
+SUPERVISOR: killed PAYLOAD: 175 us, cpu 2 offline request: ok, tsc 40323122000
+PAYLOAD: started, generation 3, 148 pages at 0xb000114000, tsc 40329520000
+SUPERVISOR: started PAYLOAD on cpu 2: image 26704 bytes, 148 pages given, 0 kept by MC, 6976 us, tsc 40330407000
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+SUPERVISOR: probe of PAYLOAD rings: MC can read 0 of 4 pages
+BUS payload generation 3
+SUPERVISOR: PAYLOAD restart 2 done in 11027 us, tsc 40333643000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=40462318000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=0 attacks=0 generation=3 tsc=40536618000
+TO_TEST: BUS_HK        fwd_mc=7 fwd_payload=61 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=40581826000
+TO_TEST: ADCS_HK       cmd=10 err=0 roll=1000 pitch=-1000 yaw=500 accepted=10 max_abs=7000 tsc=40730981000
+TO_TEST: CFE_TBL_HK    mid=0x0804 len=300 cmd=0 err=0 tsc=40863070000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=41464162000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1 attacks=0 generation=3 tsc=41539764000
+BUS STATS forwarded mc=7 payload=62 denied mc=0 payload=4 dropped mc=0 payload=0 restarts=0
+BUS CYCLES forward n=69 median=3000 p99=188000 max=188000 deny n=4 median=12000 p99=62000 max=62000
+TO_TEST: BUS_HK        fwd_mc=7 fwd_payload=62 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=41585255000
+TO_TEST: ADCS_HK       cmd=10 err=0 roll=1000 pitch=-1000 yaw=500 accepted=10 max_abs=7000 tsc=41723048000
+ADCS_SIM: SET_POINTING roll=1000 pitch=-1000 yaw=500
+TO_TEST: CFE_TIME_HK   mid=0x0805 len=48 cmd=0 err=0 tsc=42065321000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=42466112000
+TO_TEST: CFE_ES_HK     mid=0x0800 len=184 cmd=2 err=0 tsc=42466627000
+TO_TEST: HK_HK         mid=0x089B len=28 cmd=0 err=0 tsc=42467137000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=2 attacks=0 generation=3 tsc=42543254000
+TO_TEST: BUS_HK        fwd_mc=7 fwd_payload=64 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=42579431000
+TO_TEST: ADCS_HK       cmd=11 err=0 roll=1000 pitch=-1000 yaw=500 accepted=11 max_abs=7000 tsc=42731560000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=43467886000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=3 attacks=0 generation=3 tsc=43537675000
+TO_TEST: BUS_HK        fwd_mc=7 fwd_payload=65 denied_payload=4 dropped_payload=0 restart_requests=0 tsc=43582887000
+CI_TEST: sending ATTACK B4 malformed packets (attack=8) tsc=43792751000
+PAYLOAD: ATTACK 8 begins, tsc 43794421000
+BUS DENY sender=payload mid=0x0000 cc=0 reason=malformed denials=5
+BUS DENY sender=payload mid=0x0000 cc=0 reason=malformed denials=6
+TO_TEST: BUS_EVENT     sender=2 reason=1 mid=0x0000 cc=0 denials=5 tsc=43802428000
+TO_TEST: BUS_EVENT     sender=2 reason=1 mid=0x0000 cc=0 denials=6 tsc=43803067000
+TO_TEST: ADCS_HK       cmd=11 err=0 roll=1000 pitch=-1000 yaw=500 accepted=11 max_abs=7000 tsc=43822839000
+TO_TEST: CFE_SB_HK     mid=0x0803 len=44 cmd=0 err=0 tsc=43868648000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=44469935000
+TO_TEST: CFE_EVS_HK    mid=0x0801 len=288 cmd=0 err=0 tsc=44470511000
+TO_TEST: BUS_HK        fwd_mc=8 fwd_payload=65 denied_payload=6 dropped_payload=0 restart_requests=0 tsc=44588385000
+TO_TEST: ADCS_HK       cmd=11 err=0 roll=1000 pitch=-1000 yaw=500 accepted=11 max_abs=7000 tsc=44814876000
+BUS DENY sender=payload mid=0x0000 cc=0 reason=malformed denials=7
+TO_TEST: BUS_EVENT     sender=2 reason=1 mid=0x0000 cc=0 denials=7 tsc=45003759000
+BUS DENY sender=payload mid=0x0000 cc=0 reason=malformed denials=8
+TO_TEST: BUS_EVENT     sender=2 reason=1 mid=0x0000 cc=0 denials=8 tsc=45021871000
+PAYLOAD: B4 sent four malformed records
+TO_TEST: PAYLOAD_REPORT B4 sent four malformed records
+TO_TEST: IMAGER_HK     cmd=1 err=0 counter=4 attacks=1 generation=3 tsc=45040580000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=45471636000
+TO_TEST: IMAGER_HK     cmd=1 err=0 counter=5 attacks=1 generation=3 tsc=45545757000
+TO_TEST: BUS_HK        fwd_mc=8 fwd_payload=68 denied_payload=8 dropped_payload=0 restart_requests=0 tsc=45590938000
+TO_TEST: CFE_TBL_HK    mid=0x0804 len=300 cmd=0 err=0 tsc=45672026000
+TO_TEST: ADCS_HK       cmd=11 err=0 roll=1000 pitch=-1000 yaw=500 accepted=11 max_abs=7000 tsc=45806905000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=46473603000
+TO_TEST: CFE_TIME_HK   mid=0x0805 len=48 cmd=0 err=0 tsc=46474238000
+TO_TEST: CFE_ES_HK     mid=0x0800 len=184 cmd=2 err=0 tsc=46474849000
+TO_TEST: IMAGER_HK     cmd=1 err=0 counter=6 attacks=1 generation=3 tsc=46548737000
+BUS STATS forwarded mc=8 payload=69 denied mc=0 payload=8 dropped mc=0 payload=0 restarts=0
+BUS CYCLES forward n=77 median=3000 p99=188000 max=188000 deny n=7 median=12000 p99=62000 max=62000
+TO_TEST: BUS_HK        fwd_mc=8 fwd_payload=69 denied_payload=8 dropped_payload=0 restart_requests=0 tsc=46593960000
+TO_TEST: ADCS_HK       cmd=11 err=0 roll=1000 pitch=-1000 yaw=500 accepted=11 max_abs=7000 tsc=46798947000
+ADCS_SIM: SET_POINTING roll=2000 pitch=-2000 yaw=1000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=47475397000
+TO_TEST: HK_HK         mid=0x089B len=28 cmd=0 err=0 tsc=47475928000
+TO_TEST: IMAGER_HK     cmd=1 err=0 counter=7 attacks=1 generation=3 tsc=47551438000
+TO_TEST: BUS_HK        fwd_mc=8 fwd_payload=71 denied_payload=8 dropped_payload=0 restart_requests=0 tsc=47596619000
+TO_TEST: ADCS_HK       cmd=12 err=0 roll=2000 pitch=-2000 yaw=1000 accepted=12 max_abs=7000 tsc=47740146000
+CI_TEST: sending ATTACK B5 flood (attack=9) tsc=47800827000
+PAYLOAD: ATTACK 9 begins, tsc 47801949000
+BUS DENY sender=payload reason=rate dropped=1
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=0 attacks=0 generation=0 tsc=47810629000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1 attacks=0 generation=0 tsc=47811019000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=2 attacks=0 generation=0 tsc=47811334000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=3 attacks=0 generation=0 tsc=47811668000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=4 attacks=0 generation=0 tsc=47811990000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=5 attacks=0 generation=0 tsc=47812299000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=6 attacks=0 generation=0 tsc=47812606000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=7 attacks=0 generation=0 tsc=47812935000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=8 attacks=0 generation=0 tsc=47813265000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=9 attacks=0 generation=0 tsc=47813584000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=10 attacks=0 generation=0 tsc=47813920000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=11 attacks=0 generation=0 tsc=47814243000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=12 attacks=0 generation=0 tsc=47814589000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=13 attacks=0 generation=0 tsc=47814916000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=14 attacks=0 generation=0 tsc=47815233000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=15 attacks=0 generation=0 tsc=47815553000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=16 attacks=0 generation=0 tsc=47815965000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=17 attacks=0 generation=0 tsc=47816297000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=18 attacks=0 generation=0 tsc=47816626000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=19 attacks=0 generation=0 tsc=47816958000
+TO_TEST: BUS_EVENT     sender=2 reason=5 mid=0x0000 cc=0 denials=1 tsc=47817283000
+BUS DENY sender=payload reason=rate dropped=118895
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118914 attacks=0 generation=0 tsc=47910066000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118915 attacks=0 generation=0 tsc=47910480000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118916 attacks=0 generation=0 tsc=47910833000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118917 attacks=0 generation=0 tsc=47911172000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118918 attacks=0 generation=0 tsc=47911493000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118919 attacks=0 generation=0 tsc=47911827000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118920 attacks=0 generation=0 tsc=47912156000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118921 attacks=0 generation=0 tsc=47912491000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118922 attacks=0 generation=0 tsc=47912895000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118923 attacks=0 generation=0 tsc=47913267000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118924 attacks=0 generation=0 tsc=47913639000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118925 attacks=0 generation=0 tsc=47913957000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118926 attacks=0 generation=0 tsc=47914273000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118927 attacks=0 generation=0 tsc=47914610000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118928 attacks=0 generation=0 tsc=47914923000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118929 attacks=0 generation=0 tsc=47915265000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118930 attacks=0 generation=0 tsc=47915600000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118931 attacks=0 generation=0 tsc=47915918000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118932 attacks=0 generation=0 tsc=47916246000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=118933 attacks=0 generation=0 tsc=47916572000
+TO_TEST: BUS_EVENT     sender=2 reason=5 mid=0x0000 cc=0 denials=118895 tsc=47916898000
+BUS DENY sender=payload reason=rate dropped=236751
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236790 attacks=0 generation=0 tsc=48009527000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236791 attacks=0 generation=0 tsc=48009910000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236792 attacks=0 generation=0 tsc=48010256000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236793 attacks=0 generation=0 tsc=48010597000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236794 attacks=0 generation=0 tsc=48010952000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236795 attacks=0 generation=0 tsc=48011294000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236796 attacks=0 generation=0 tsc=48011635000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236797 attacks=0 generation=0 tsc=48012069000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236798 attacks=0 generation=0 tsc=48012406000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236799 attacks=0 generation=0 tsc=48012737000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236800 attacks=0 generation=0 tsc=48013074000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236801 attacks=0 generation=0 tsc=48013396000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236802 attacks=0 generation=0 tsc=48013738000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236803 attacks=0 generation=0 tsc=48014172000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236804 attacks=0 generation=0 tsc=48014549000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236805 attacks=0 generation=0 tsc=48014891000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236806 attacks=0 generation=0 tsc=48015236000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236807 attacks=0 generation=0 tsc=48015583000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236808 attacks=0 generation=0 tsc=48015912000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=236809 attacks=0 generation=0 tsc=48016240000
+TO_TEST: BUS_EVENT     sender=2 reason=5 mid=0x0000 cc=0 denials=236751 tsc=48016564000
+BUS DENY sender=payload reason=rate dropped=354684
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354743 attacks=0 generation=0 tsc=48108984000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354744 attacks=0 generation=0 tsc=48109365000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354745 attacks=0 generation=0 tsc=48109715000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354746 attacks=0 generation=0 tsc=48110026000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354747 attacks=0 generation=0 tsc=48110345000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354748 attacks=0 generation=0 tsc=48110665000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354749 attacks=0 generation=0 tsc=48110977000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354750 attacks=0 generation=0 tsc=48111288000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354751 attacks=0 generation=0 tsc=48111590000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354752 attacks=0 generation=0 tsc=48111914000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354753 attacks=0 generation=0 tsc=48112225000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354754 attacks=0 generation=0 tsc=48112569000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354755 attacks=0 generation=0 tsc=48113013000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354756 attacks=0 generation=0 tsc=48113416000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354757 attacks=0 generation=0 tsc=48113774000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354758 attacks=0 generation=0 tsc=48114160000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354759 attacks=0 generation=0 tsc=48114496000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354760 attacks=0 generation=0 tsc=48114970000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354761 attacks=0 generation=0 tsc=48115328000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=354762 attacks=0 generation=0 tsc=48115652000
+TO_TEST: BUS_EVENT     sender=2 reason=5 mid=0x0000 cc=0 denials=354684 tsc=48115979000
+BUS DENY sender=payload reason=rate dropped=473329
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473408 attacks=0 generation=0 tsc=48208469000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473409 attacks=0 generation=0 tsc=48209159000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473410 attacks=0 generation=0 tsc=48209518000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473411 attacks=0 generation=0 tsc=48209866000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473412 attacks=0 generation=0 tsc=48210211000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473413 attacks=0 generation=0 tsc=48210649000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473414 attacks=0 generation=0 tsc=48210988000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473415 attacks=0 generation=0 tsc=48211325000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473416 attacks=0 generation=0 tsc=48211651000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473417 attacks=0 generation=0 tsc=48211976000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473418 attacks=0 generation=0 tsc=48212305000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473419 attacks=0 generation=0 tsc=48212648000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473420 attacks=0 generation=0 tsc=48212976000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473421 attacks=0 generation=0 tsc=48213314000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473422 attacks=0 generation=0 tsc=48213635000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473423 attacks=0 generation=0 tsc=48213987000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473424 attacks=0 generation=0 tsc=48214322000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473425 attacks=0 generation=0 tsc=48214655000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473426 attacks=0 generation=0 tsc=48214988000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=473427 attacks=0 generation=0 tsc=48215317000
+TO_TEST: BUS_EVENT     sender=2 reason=5 mid=0x0000 cc=0 denials=473329 tsc=48215754000
+BUS DENY sender=payload reason=rate dropped=592254
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592353 attacks=0 generation=0 tsc=48307922000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592354 attacks=0 generation=0 tsc=48308302000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592355 attacks=0 generation=0 tsc=48308689000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592356 attacks=0 generation=0 tsc=48309027000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592357 attacks=0 generation=0 tsc=48309358000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592358 attacks=0 generation=0 tsc=48309689000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592359 attacks=0 generation=0 tsc=48310066000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592360 attacks=0 generation=0 tsc=48310405000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592361 attacks=0 generation=0 tsc=48310733000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592362 attacks=0 generation=0 tsc=48311062000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592363 attacks=0 generation=0 tsc=48311396000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592364 attacks=0 generation=0 tsc=48311772000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592365 attacks=0 generation=0 tsc=48312110000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592366 attacks=0 generation=0 tsc=48312444000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592367 attacks=0 generation=0 tsc=48312869000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592368 attacks=0 generation=0 tsc=48313333000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592369 attacks=0 generation=0 tsc=48313687000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592370 attacks=0 generation=0 tsc=48314029000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592371 attacks=0 generation=0 tsc=48314360000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=592372 attacks=0 generation=0 tsc=48314688000
+TO_TEST: BUS_EVENT     sender=2 reason=5 mid=0x0000 cc=0 denials=592254 tsc=48315026000
+BUS DENY sender=payload reason=rate dropped=702148
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702267 attacks=0 generation=0 tsc=48407422000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702268 attacks=0 generation=0 tsc=48407828000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702269 attacks=0 generation=0 tsc=48408206000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702270 attacks=0 generation=0 tsc=48408538000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702271 attacks=0 generation=0 tsc=48408864000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702272 attacks=0 generation=0 tsc=48409185000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702273 attacks=0 generation=0 tsc=48409522000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702274 attacks=0 generation=0 tsc=48409900000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702275 attacks=0 generation=0 tsc=48410230000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702276 attacks=0 generation=0 tsc=48410572000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702277 attacks=0 generation=0 tsc=48410927000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702278 attacks=0 generation=0 tsc=48411270000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702279 attacks=0 generation=0 tsc=48411601000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702280 attacks=0 generation=0 tsc=48411933000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702281 attacks=0 generation=0 tsc=48412262000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702282 attacks=0 generation=0 tsc=48412603000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702283 attacks=0 generation=0 tsc=48412947000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702284 attacks=0 generation=0 tsc=48413273000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702285 attacks=0 generation=0 tsc=48413613000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=702286 attacks=0 generation=0 tsc=48413930000
+TO_TEST: BUS_EVENT     sender=2 reason=5 mid=0x0000 cc=0 denials=702148 tsc=48414246000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=48477273000
+TO_TEST: CFE_SB_HK     mid=0x0803 len=44 cmd=0 err=0 tsc=48477669000
+BUS DENY sender=payload reason=rate dropped=817859
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=817998 attacks=0 generation=0 tsc=48506898000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=817999 attacks=0 generation=0 tsc=48507310000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818000 attacks=0 generation=0 tsc=48507653000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818001 attacks=0 generation=0 tsc=48507980000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818002 attacks=0 generation=0 tsc=48508318000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818003 attacks=0 generation=0 tsc=48508651000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818004 attacks=0 generation=0 tsc=48508986000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818005 attacks=0 generation=0 tsc=48509373000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818006 attacks=0 generation=0 tsc=48509720000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818007 attacks=0 generation=0 tsc=48510049000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818008 attacks=0 generation=0 tsc=48510381000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818009 attacks=0 generation=0 tsc=48510757000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818010 attacks=0 generation=0 tsc=48511120000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818011 attacks=0 generation=0 tsc=48511489000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818012 attacks=0 generation=0 tsc=48511885000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818013 attacks=0 generation=0 tsc=48512265000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818014 attacks=0 generation=0 tsc=48512600000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818015 attacks=0 generation=0 tsc=48512950000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818016 attacks=0 generation=0 tsc=48513574000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=818017 attacks=0 generation=0 tsc=48513926000
+TO_TEST: BUS_EVENT     sender=2 reason=5 mid=0x0000 cc=0 denials=817859 tsc=48514274000
+TO_TEST: BUS_HK        fwd_mc=9 fwd_payload=231 denied_payload=8 dropped_payload=918962 restart_requests=0 tsc=48597171000
+BUS DENY sender=payload reason=rate dropped=935708
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935867 attacks=0 generation=0 tsc=48606373000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935868 attacks=0 generation=0 tsc=48606778000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935869 attacks=0 generation=0 tsc=48607200000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935870 attacks=0 generation=0 tsc=48607531000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935871 attacks=0 generation=0 tsc=48607868000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935872 attacks=0 generation=0 tsc=48608206000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935873 attacks=0 generation=0 tsc=48608546000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935874 attacks=0 generation=0 tsc=48608893000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935875 attacks=0 generation=0 tsc=48609296000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935876 attacks=0 generation=0 tsc=48609645000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935877 attacks=0 generation=0 tsc=48609986000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935878 attacks=0 generation=0 tsc=48610327000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935879 attacks=0 generation=0 tsc=48610667000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935880 attacks=0 generation=0 tsc=48611005000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935881 attacks=0 generation=0 tsc=48611343000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935882 attacks=0 generation=0 tsc=48611698000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935883 attacks=0 generation=0 tsc=48612042000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935884 attacks=0 generation=0 tsc=48612389000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935885 attacks=0 generation=0 tsc=48612735000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=935886 attacks=0 generation=0 tsc=48613070000
+TO_TEST: BUS_EVENT     sender=2 reason=5 mid=0x0000 cc=0 denials=935708 tsc=48613406000
+TO_TEST: CFE_EVS_HK    mid=0x0801 len=288 cmd=0 err=0 tsc=48677628000
+BUS DENY sender=payload reason=rate dropped=1054686
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054865 attacks=0 generation=0 tsc=48705848000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054866 attacks=0 generation=0 tsc=48706306000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054867 attacks=0 generation=0 tsc=48706850000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054868 attacks=0 generation=0 tsc=48707198000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054869 attacks=0 generation=0 tsc=48707639000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054870 attacks=0 generation=0 tsc=48707999000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054871 attacks=0 generation=0 tsc=48708489000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054872 attacks=0 generation=0 tsc=48708861000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054873 attacks=0 generation=0 tsc=48709236000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054874 attacks=0 generation=0 tsc=48709662000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054875 attacks=0 generation=0 tsc=48710012000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054876 attacks=0 generation=0 tsc=48710356000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054877 attacks=0 generation=0 tsc=48710704000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054878 attacks=0 generation=0 tsc=48711046000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054879 attacks=0 generation=0 tsc=48711371000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054880 attacks=0 generation=0 tsc=48711698000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054881 attacks=0 generation=0 tsc=48712027000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054882 attacks=0 generation=0 tsc=48712361000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054883 attacks=0 generation=0 tsc=48712698000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1054884 attacks=0 generation=0 tsc=48713035000
+TO_TEST: BUS_EVENT     sender=2 reason=5 mid=0x0000 cc=0 denials=1054686 tsc=48713373000
+BUS DENY sender=payload reason=rate dropped=1173168
+BUS RESTART_REQUEST sender=payload reason=rate denied=8 dropped=1173168 t=48713267us
+SUPERVISOR: detected RESTART_REQUEST from the bus: process=2 reason=5 denials=8 dropped=1173168, tsc 48805435000
+SUPERVISOR: restarting PAYLOAD: the bus asked for it, tsc 48805880000
+SUPERVISOR: killed PAYLOAD: 1054 us, cpu 2 offline request: ok, tsc 48807241000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173367 attacks=0 generation=0 tsc=48810417000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173368 attacks=0 generation=0 tsc=48810817000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173369 attacks=0 generation=0 tsc=48811148000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173370 attacks=0 generation=0 tsc=48811814000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173371 attacks=0 generation=0 tsc=48812162000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173372 attacks=0 generation=0 tsc=48812523000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173373 attacks=0 generation=0 tsc=48812864000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173374 attacks=0 generation=0 tsc=48813198000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173375 attacks=0 generation=0 tsc=48813533000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173376 attacks=0 generation=0 tsc=48813884000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173377 attacks=0 generation=0 tsc=48814245000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173378 attacks=0 generation=0 tsc=48814606000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173379 attacks=0 generation=0 tsc=48814942000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173380 attacks=0 generation=0 tsc=48815282000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173381 attacks=0 generation=0 tsc=48815625000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173382 attacks=0 generation=0 tsc=48815964000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173383 attacks=0 generation=0 tsc=48816304000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173384 attacks=0 generation=0 tsc=48816655000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173385 attacks=0 generation=0 tsc=48816992000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1173386 attacks=0 generation=0 tsc=48817336000
+TO_TEST: BUS_EVENT     sender=2 reason=5 mid=0x0000 cc=0 denials=1173168 tsc=48817674000
+PAYLOAD: started, generation 4, 148 pages at 0xb000114000, tsc 48818601000
+SUPERVISOR: started PAYLOAD on cpu 2: image 26704 bytes, 148 pages given, 0 kept by MC, 11849 us, tsc 48819456000
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+SUPERVISOR: probe of PAYLOAD rings: MC can read 0 of 4 pages
+SUPERVISOR: PAYLOAD restart 3 done in 15330 us, tsc 48821238000
+BUS payload generation 4
+TO_TEST: ADCS_HK       cmd=12 err=0 roll=2000 pitch=-2000 yaw=1000 accepted=12 max_abs=7000 tsc=48831341000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=0 attacks=0 generation=4 tsc=49029223000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=49479117000
+TO_TEST: BUS_HK        fwd_mc=9 fwd_payload=292 denied_payload=8 dropped_payload=1173168 restart_requests=1 tsc=49598088000
+TO_TEST: ADCS_HK       cmd=12 err=0 roll=2000 pitch=-2000 yaw=1000 accepted=12 max_abs=7000 tsc=49823394000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1 attacks=0 generation=4 tsc=50024048000
+ADCS_SIM: SET_POINTING roll=1000 pitch=-1000 yaw=500
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=50481095000
+TO_TEST: CFE_ES_HK     mid=0x0800 len=184 cmd=2 err=0 tsc=50481755000
+TO_TEST: CFE_TBL_HK    mid=0x0804 len=300 cmd=0 err=0 tsc=50482224000
+TO_TEST: BUS_HK        fwd_mc=9 fwd_payload=294 denied_payload=8 dropped_payload=1173168 restart_requests=1 tsc=50602243000
+TO_TEST: ADCS_HK       cmd=13 err=0 roll=1000 pitch=-1000 yaw=500 accepted=13 max_abs=7000 tsc=50827604000
+TO_TEST: CFE_TIME_HK   mid=0x0805 len=48 cmd=0 err=0 tsc=50881889000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=2 attacks=0 generation=4 tsc=51027404000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=51482872000
+BUS STATS forwarded mc=9 payload=295 denied mc=0 payload=8 dropped mc=0 payload=1173168 restarts=1
+BUS CYCLES forward n=304 median=1000 p99=90000 max=188000 deny n=7 median=12000 p99=62000 max=62000
+TO_TEST: BUS_HK        fwd_mc=9 fwd_payload=295 denied_payload=8 dropped_payload=1173168 restart_requests=1 tsc=51596867000
+TO_TEST: ADCS_HK       cmd=13 err=0 roll=1000 pitch=-1000 yaw=500 accepted=13 max_abs=7000 tsc=51819759000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=3 attacks=0 generation=4 tsc=52030469000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=52484749000
+TO_TEST: HK_HK         mid=0x089B len=28 cmd=0 err=0 tsc=52485327000
+TO_TEST: BUS_HK        fwd_mc=9 fwd_payload=296 denied_payload=8 dropped_payload=1173168 restart_requests=1 tsc=52599694000
+CI_TEST: sending ATTACK B6 change after check (attack=10) tsc=52810815000
+TO_TEST: ADCS_HK       cmd=13 err=0 roll=1000 pitch=-1000 yaw=500 accepted=13 max_abs=7000 tsc=52811778000
+PAYLOAD: ATTACK 10 begins, tsc 52812684000
+ADCS_SIM: SET_POINTING roll=5000 pitch=5000 yaw=5000
+ADCS_SIM: SET_POINTING roll=5000 pitch=5000 yaw=5000
+BUS DENY sender=payload mid=0x18D1 cc=1 reason=range denials=9
+TO_TEST: BUS_EVENT     sender=2 reason=4 mid=0x18D1 cc=1 denials=9 tsc=52839115000
+BUS DENY sender=payload mid=0x18D1 cc=1 reason=range denials=10
+TO_TEST: BUS_EVENT     sender=2 reason=4 mid=0x18D1 cc=1 denials=10 tsc=52848181000
+ADCS_SIM: SET_POINTING roll=5000 pitch=5000 yaw=5000
+BUS DENY sender=payload mid=0x18D1 cc=1 reason=range denials=11
+BUS RESTART_REQUEST sender=payload reason=range denied=11 dropped=1173168 t=52765241us
+SUPERVISOR: detected RESTART_REQUEST from the bus: process=2 reason=4 denials=11 dropped=1173168, tsc 52866392000
+SUPERVISOR: restarting PAYLOAD: the bus asked for it, tsc 52867234000
+SUPERVISOR: killed PAYLOAD: 335 us, cpu 2 offline request: ok, tsc 52868017000
+TO_TEST: BUS_EVENT     sender=2 reason=4 mid=0x18D1 cc=1 denials=11 tsc=52871654000
+PAYLOAD: started, generation 5, 148 pages at 0xb000114000, tsc 52871729000
+SUPERVISOR: started PAYLOAD on cpu 2: image 26704 bytes, 148 pages given, 0 kept by MC, 4058 us, tsc 52872494000
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+ WARN CPU 0: Page Fault in ring 3 at rip 0x8000038275; the thread exits
+SUPERVISOR: probe of PAYLOAD rings: MC can read 0 of 4 pages
+SUPERVISOR: PAYLOAD restart 4 done in 7289 us, tsc 52874536000
+BUS payload generation 5
+TO_TEST: CFE_EVS_HK    mid=0x0801 len=288 cmd=0 err=0 tsc=52885523000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=0 attacks=0 generation=5 tsc=53079735000
+TO_TEST: CFE_SB_HK     mid=0x0803 len=44 cmd=0 err=0 tsc=53085851000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=53486603000
+TO_TEST: BUS_HK        fwd_mc=10 fwd_payload=300 denied_payload=11 dropped_payload=1173168 restart_requests=2 tsc=53604954000
+TO_TEST: ADCS_HK       cmd=16 err=0 roll=5000 pitch=5000 yaw=5000 accepted=16 max_abs=7000 tsc=53750613000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=1 attacks=0 generation=5 tsc=54083829000
+ADCS_SIM: SET_POINTING roll=1000 pitch=-1000 yaw=500
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=54488520000
+TO_TEST: CFE_ES_HK     mid=0x0800 len=184 cmd=2 err=0 tsc=54489094000
+TO_TEST: BUS_HK        fwd_mc=10 fwd_payload=302 denied_payload=11 dropped_payload=1173168 restart_requests=2 tsc=54608131000
+TO_TEST: ADCS_HK       cmd=17 err=0 roll=1000 pitch=-1000 yaw=500 accepted=17 max_abs=7000 tsc=54779504000
+TO_TEST: IMAGER_HK     cmd=0 err=0 counter=2 attacks=0 generation=5 tsc=55078270000
+TO_TEST: CFE_TIME_HK   mid=0x0805 len=48 cmd=0 err=0 tsc=55290008000
+TO_TEST: CFE_TBL_HK    mid=0x0804 len=300 cmd=0 err=0 tsc=55290601000
+TO_TEST: SAMPLE_APP_HK mid=0x0883 len=18 cmd=1 err=0 tsc=55490429000
+TO_TEST: BUS_HK        fwd_mc=10 fwd_payload=303 denied_payload=11 dropped_payload=1173168 restart_requests=2 tsc=55603543000
+TO_TEST: ADCS_HK       cmd=17 err=0 roll=1000 pitch=-1000 yaw=500 accepted=17 max_abs=7000 tsc=55771584000
+CI_TEST: script done, the word of MC memory is 0x5ec4e7

@@ -8,7 +8,9 @@ mkdir -p "$out"
 objs=()
 for src in "$here"/src/*.c; do
     obj="$out/$(basename "${src%.c}").o"
-    $ATMO_CC $ATMO_CFLAGS -O2 -Wall -Wextra -c "$src" -o "$obj"
+    # One section per function: a program that uses part of the library does
+    # not need what the rest refers to.
+    $ATMO_CC $ATMO_CFLAGS -O2 -Wall -Wextra -ffunction-sections -fdata-sections -c "$src" -o "$obj"
     objs+=("$obj")
 done
 rm -f "$out/libatmo_c.a"

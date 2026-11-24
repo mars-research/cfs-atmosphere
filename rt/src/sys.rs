@@ -145,3 +145,149 @@ pub fn counter_hz() -> (u64, RateSource) {
 pub fn exit(code: u32) -> ! {
     unsafe { vsys::sys_debug_exit(code as usize) }
 }
+
+// ---- Containers ----
+//
+// The calls below let the first process create, start, and end child
+// containers. They return the kernel's result: zero or more on success, a
+// negative value otherwise (`error_name` names it).
+
+/// The 2M quota that this thread holds for a container it is about to create.
+static QUOTA_2M: Quota = Quota(UnsafeCell::new(0));
+
+/// Takes `amount` 4K quota out of the count that `fund` keeps.
+fn spend(amount: usize) {
+    let held = unsafe { &mut *QUOTA.0.get() };
+    *held = held.saturating_sub(amount);
+}
+
+/// Unmaps `pages` pages at `va`. The pages go back to the container.
+pub fn unmap_pages(va: usize, pages: usize) -> isize {
+    let mut va = va;
+    let mut left = pages;
+    while left != 0 {
+        let n = left.min(MAP_CHUNK);
+        let ret = unsafe { vsys::sys_unmap_4k(va, n) };
+        if ret < 0 {
+            return ret;
+        }
+        va += n * PAGE_SIZE;
+        left -= n;
+    }
+    0
+}
+
+/// Creates a child container. Its root process maps the caller's pages
+/// `[va, va + pages * 4K)` at the same addresses, and its first thread starts
+/// at `entry` with the stack pointer `sp` on processor `cpu`, which must be
+/// off and belong to the caller's container. The container gets `funding`
+/// pages of quota, of which `process_quota` go to its process.
+///
+/// The new thread starts with the caller's registers, so it finds `va` in
+/// `rdi` and `pages` in `rsi`.
+///
+/// With `endpoint`, the first thread of the child holds that endpoint of the
+/// caller in its descriptor 0.
+pub fn new_container(
+    va: usize,
+    pages: usize,
+    funding: usize,
+    process_quota: usize,
+    cpu: usize,
+    endpoint: Option<usize>,
+    entry: usize,
+    sp: usize,
+) -> isize {
+    // The kernel wants this much 4K quota in the thread, and two 2M pages
+    // for the objects of the container.
+    let need = 9 + funding + 3 * pages;
+    if !fund(need) {
+        return -1;
+    }
+    // The 2M quota stays with the thread if the kernel refuses the container,
+    // for example because the processor is not off yet; do not take it twice.
+    let held_2m = unsafe { &mut *QUOTA_2M.0.get() };
+    unsafe {
+        if *held_2m < 2 {
+            let more = 2 - *held_2m;
+            let ret = vsys::sys_alloc_quota_2m(more);
+            if ret < 0 {
+                return ret;
+            }
+            let ret = vsys::sys_alloc_thread_quota_2m(more);
+            if ret < 0 {
+                return ret;
+            }
+            *held_2m = 2;
+        }
+        let ret = match endpoint {
+            Some(ep) => vsys::sys_new_container_with_endpoint(va, pages, funding, process_quota, cpu, ep, entry, sp).rax,
+            None => vsys::sys_new_container(va, pages, funding, process_quota, cpu, entry, sp).rax,
+        };
+        if ret >= 0 {
+            spend(need);
+            *held_2m -= 2;
+        }
+        ret
+    }
+}
+
+/// Brings processor `cpu` of the `child`-th child container online.
+pub fn cpu_online_child(child: usize, cpu: usize) -> isize {
+    unsafe { vsys::sys_cpu_online_child(child, cpu) }
+}
+
+/// Asks processor `cpu` of the caller's container to go off.
+pub fn cpu_offline_request(cpu: usize) -> isize {
+    unsafe { vsys::sys_cpu_offline_request(cpu) }
+}
+
+/// Asks processor `cpu` of the `child`-th child container to go off.
+pub fn cpu_offline_request_child(child: usize, cpu: usize) -> isize {
+    unsafe { vsys::sys_cpu_offline_request_child(child, cpu) }
+}
+
+/// Ends the `child`-th child container with everything in it. Its
+/// processors and pages return to the caller's container.
+pub fn kill_container(child: usize) -> isize {
+    unsafe { vsys::sys_kill_container(child) }
+}
+
+/// Sends the caller's `pages` pages at `va` to the thread that receives
+/// pages on the endpoint in descriptor `endpoint`; that thread's process
+/// then maps them too. Blocks until a receiver is there.
+pub fn send_pages(endpoint: usize, va: usize, pages: usize) -> isize {
+    unsafe { vsys::sys_send_pages(endpoint, va, pages) }
+}
+
+/// Starts a second kernel thread of this process at `entry` with the stack
+/// pointer `sp`. The runtime is not safe for use from it.
+pub fn new_thread(entry: usize, sp: usize) -> isize {
+    if !fund(1) {
+        return -1;
+    }
+    let ret = unsafe { vsys::sys_new_thread(entry, sp) };
+    if ret >= 0 {
+        spend(1);
+    }
+    ret
+}
+
+/// Ends the calling kernel thread.
+pub fn thread_exit() -> ! {
+    loop {
+        unsafe { vsys::syscall0(vsys::NR_THREAD_EXIT) };
+    }
+}
+
+/// Gives the processor to another thread of the container, if one waits.
+pub fn yield_cpu() {
+    unsafe {
+        vsys::sys_schedule();
+    }
+}
+
+/// The name of a kernel result.
+pub fn error_name(code: isize) -> &'static str {
+    vsys::error_name(code)
+}

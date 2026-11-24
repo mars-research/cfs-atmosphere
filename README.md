@@ -24,6 +24,9 @@ Tested under QEMU (software emulation) on the kernel commit that the
 | cFE with five applications | `tools/test-cfs.sh` | all checks pass |
 | Kernel: two threads, preemption and thread switches | `tests/preempt/build.sh` | 20 checks pass |
 | Kernel: its own self-test (`boot/dom0`), 4 processors | `atmosphere-smp/boot/run.sh` | passes |
+| Child containers: load, isolate, fault, kill, restart | `tests/container/build.sh` | 19 checks pass |
+| Attack demo without cFS: bus and payload in containers | `tests/demo/build.sh` | 38 checks pass |
+| Attack demo under cFS, 4 processors | `tools/test-attack-demo.sh` | 13 of 13 scenarios pass |
 | Kernel: Verus | `tools/verify-atmosphere.sh` | 5017 verified, 0 errors |
 
 `tools/test-cfs.sh` boots the flight software and checks that the cFE reaches
@@ -44,11 +47,14 @@ command.
 | `psp/pc-atmosphere/` | The PSP (`CFE_SYSTEM_PSPNAME=pc-atmosphere`). The build links it into `cFS/psp/fsw/`, because the PSP build has no hook for an outside directory. |
 | `atmo_defs/` | Mission definitions: targets, startup script, OSAL configuration, the `SCH_LAB` schedule. |
 | `apps/ci_test`, `apps/to_test` | Command ingest from a built-in script, and telemetry output to the console. They stand in for `ci_lab` and `to_lab`, which need UDP. |
+| `apps/supervisor`, `apps/bus_bridge`, `apps/adcs_sim` | The flight-software side of the attack demo: the loader and watchdog of the containers, the gateway to the bus, and a stand-in for attitude control. |
+| `demo/` | The rest of the attack demo: the bus (Rust) and the payload (C), which run in child containers, the shared ring and message definitions, the ELF loader, and the container life cycle (`demo/mc`). |
 | `cmake/` | The CMake toolchain file for C code in an Atmosphere process. |
 | `tools/` | Build and run scripts. |
-| `tests/` | The hello program, the runtime tests, the kernel thread test, and the project that builds the OSAL tests. |
+| `tests/` | The hello program, the runtime tests, the kernel thread test, the container test, the attack demo without cFS, and the project that builds the OSAL tests. |
 | `flake.nix` | The development shell. |
 | `docs/open-questions.md` | What the port still needs from the kernel, the questions that decide the next design, and the next steps. |
+| `docs/attack-demo-results.md` | The attack demo: what was built, the scenarios, the log lines, the measurements, and the limitations. `docs/attack-demo/` has the logs. |
 
 The two submodules pin the tested combination. `ATMO_ROOT` (the kernel tree)
 and `CFS_ROOT` point the scripts at other checkouts.
@@ -76,6 +82,7 @@ Then:
     tools/build-atmosphere.sh      # loader, kernel, runtime
     tools/build-cfs.sh             # flight software: out/cfs/cfs-cpu1.img
     tools/test-cfs.sh              # boot it and check the console output
+    tools/test-attack-demo.sh      # the same boot, checked for the attack demo
 
     tests/rt/build.sh && tools/run-qemu.sh out/rt/rt_test.elf
     tests/preempt/build.sh && tools/run-qemu.sh out/preempt/preempt_test.elf
@@ -137,6 +144,23 @@ user code: an x87, SSE, or AVX instruction faults and the thread exits. All C
 code is compiled with `-mgeneral-regs-only`, so code that uses `float` or
 `double` does not compile. The runtime is built for the Rust target
 `x86_64-unknown-none`, which has no SSE either.
+
+## Attack demo
+
+The image that `tools/build-cfs.sh` builds also holds a demonstration of
+containers as a security boundary. `SUPERVISOR`, a cFS app, loads a message
+bus and a payload from the `/cf` volume, each into a child container with a
+processor of its own. Every message between the flight software and the
+payload goes through the bus, which checks it against an allow-list. The
+script of `CI_TEST` then tells the payload to attack: read and write memory
+that is not its own, reach around the bus with kernel calls, exhaust its
+memory, send forbidden, forged, out-of-range, and malformed messages, flood
+the bus, and rewrite a message after the bus has checked it. The kernel or
+the bus stops each attempt, and `SUPERVISOR` restarts the payload without an
+operator. `docs/attack-demo-results.md` has the design, the evidence, the
+numbers, and the limitations; all of it ran under QEMU only.
+
+The image needs four processors, so `tools/test-cfs.sh` boots with four too.
 
 ## Kernel
 
